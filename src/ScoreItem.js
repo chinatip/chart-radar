@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ScoreItemWrapper, InputScore } from './scoreboard-styles'
+import { ScoreItemWrapper, InputScore, InputCriteria, DeleteButton } from './scoreboard-styles'
 
 class ScoreItem extends Component {
   constructor(props) {
@@ -9,8 +9,9 @@ class ScoreItem extends Component {
   render() {
       return (
         <ScoreItemWrapper>
-            <label for="numberOfCriteria">{this.props.name}</label>
-            <InputScore type="number" name="score" min="1" max="5"></InputScore>
+            <InputCriteria value={this.props.name}/>
+            <InputScore type="number" name="score" min="1" max="5"value={this.props.value}></InputScore>
+            <DeleteButton>X</DeleteButton>
         </ScoreItemWrapper>
       );
   }

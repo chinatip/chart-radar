@@ -10,6 +10,7 @@ import Button from './Button';
 import Welcome from './Welcome';
 import ScoreBoard from '../ScoreBoard'
 import ScoreItem from '../ScoreItem'
+import RadarChart from '../RadarChart'
 
 storiesOf('Welcome', module).add('to Storybook', () => <Welcome showApp={linkTo('Button')} />);
 
@@ -20,6 +21,9 @@ storiesOf('Button', module)
 storiesOf('ScoreBoard', module)
   .add('item', () => (
     <ScoreItem name={"Criteria 1 "}/>
+  ))
+  .add('chart', () => (
+    <RadarChart />
   ))
   .add('board', () => (
     <ScoreBoard />

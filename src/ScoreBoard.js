@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
-import { ScoreList, ScoreBox } from './scoreboard-styles'
-import ScoreItem from './ScoreItem'
+import { ScoreBox } from './scoreboard-styles'
+import UserBoard from './UserBoard'
+
+import {compose} from 'redux'
+import {connect} from 'react-redux'
+import {firebaseConnect, dataToJS} from 'react-redux-firebase'
 
 class ScoreBoard extends Component {
   constructor(props) {
@@ -8,16 +12,20 @@ class ScoreBoard extends Component {
   }
 
   render() {
+    const {firebase, targets} = this.props;
     return (
-      <ScoreBox>     
-        <ScoreList>
-          <ScoreItem key={ 1 } name={"Criteria 1"}></ScoreItem>
-          <ScoreItem key={ 2 } name={"Criteria 2"}></ScoreItem>
-          <ScoreItem key={ 3 } name={"Criteria 3"}></ScoreItem>
-        </ScoreList>
+      <ScoreBox>
+        <UserBoard firebase={firebase} targets={targets}/>
       </ScoreBox>
     );
   }
 }
 
-export default ScoreBoard
+const enhance = compose(firebaseConnect(['/targets']), connect(({
+  firebase
+}, props) => {
+  const targets = dataToJS(firebase, '/targets');
+  return {targets}
+}))
+
+export default enhance(ScoreBoard)

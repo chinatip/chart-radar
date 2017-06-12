@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components'
 
 export const ScoreBox = styled.div`
   display: flex;
+  flex-direction: column;
 `
 
 export const ScoreList = styled.div`
@@ -17,9 +18,9 @@ export const ScoreList = styled.div`
 export const ScoreItemWrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 12em;
-  padding: 0.8%;
-  margin: 2%;
+  width: 280px;
+  padding: 1%;
+  margin: 0.25%;
   align-items: baseline;
   box-shadow: 0 5px 20px -5px rgba(0, 0, 0, .15);
   border-radius: 15px;
@@ -28,5 +29,17 @@ export const ScoreItemWrapper = styled.div`
 export const InputScore = styled.input`
   border: 1px solid #3db9df;
   border-radius: 5px;
-  right: 0;
+`
+
+export const InputCriteria = styled.input`
+  border: 1px solid #3db9df;
+  border-radius: 5px;
+  margin: 10px;
+`
+
+export const DeleteButton = styled.button`
+  margin: 10px;
+  background-color: #ff5c5c;
+  border: 5px solid #ff5c5c;
+  border-radius: 150px;
 `
