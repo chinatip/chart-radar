@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Chart from "react-chartjs"
 import ScoreItem from './ScoreItem'
 import {map} from 'lodash'
+import { RadarChartWrapper  } from './scoreboard-styles'
 
 const RadarChart = Chart.Radar;
 
@@ -49,15 +50,15 @@ class ScoreBoard extends Component {
         
     }}
     return (
-      <div>
+      <RadarChartWrapper>
         {
             map(this.props.data, (value, key) => {
             return (
-              <ScoreItem key={ key } name={value.name} value={value.value}></ScoreItem>
+              <ScoreItem key={ key } name={value.name} value={value.value} data={this.props.data}></ScoreItem>
             );
           })}
         <RadarChart redraw data={chartData} options={chartOptions} width="600" height="250"/>
-      </div>
+      </RadarChartWrapper>
     );
   }
 }

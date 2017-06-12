@@ -7,14 +7,16 @@ class ScoreItem extends Component {
   }
 
   updateValue = (event) => {
-    this.props.value = event.target.value;
+    // this.props.data[this.props.key].value = event.target.value;
+    console.log("event", event.target.value)
+    console.log("key", this.props.key)
   }
 
   render() {
       return (
         <ScoreItemWrapper>
             <InputCriteria value={this.props.name}/>
-            <InputScore type="number" name="score" min="1" max="20" defaultValue={this.props.value}></InputScore>
+            <InputScore type="number" name="score" min="1" max="20" defaultValue={this.props.value} onChange={this.updateValue}></InputScore>
             <DeleteButton>X</DeleteButton>
         </ScoreItemWrapper>
       );

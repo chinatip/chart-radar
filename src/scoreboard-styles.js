@@ -52,3 +52,12 @@ export const DeleteButton = styled.button`
   border: 5px solid #ff5c5c;
   border-radius: 150px;
 `
+
+////// RadarChart
+
+
+
+export const RadarChartWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`
