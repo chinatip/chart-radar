@@ -23,8 +23,16 @@ storiesOf('ScoreBoard', module)
     <ScoreItem name={"Criteria 1 "}/>
   ))
   .add('chart', () => (
-    <RadarChart />
+    <RadarChart data={[{name: "X", value: "8"},
+                {name: "Dev", value: "3"},
+                {name: "Design", value: "10"},
+                {name: "Criteria", value: "4"},
+                {name: "Criteria", value: "5"}]}/>
   ))
   .add('board', () => (
-    <ScoreBoard />
+    <ScoreBoard data={[{name: "Criteria", value: "8"},
+                {name: "Criteria", value: "8"},
+                {name: "Criteria", value: "8"},
+                {name: "Criteria", value: "8"},
+                {name: "Criteria", value: "8"}]}/>
   ))

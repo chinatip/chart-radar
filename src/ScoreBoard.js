@@ -21,11 +21,4 @@ class ScoreBoard extends Component {
   }
 }
 
-const enhance = compose(firebaseConnect(['/targets']), connect(({
-  firebase
-}, props) => {
-  const targets = dataToJS(firebase, '/targets');
-  return {targets}
-}))
-
-export default enhance(ScoreBoard)
+export default ScoreBoard

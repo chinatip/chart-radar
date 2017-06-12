@@ -1,8 +1,7 @@
 import React, {Component} from 'react'
-import {ScoreList, ScoreBox, CriteriaInput, ScoreInput} from './scoreboard-styles'
+import {ScoreList, ScoreBox, CriteriaInput, ScoreInput, UserList} from './scoreboard-styles'
 import ScoreItem from './ScoreItem'
 import RadarChart from './RadarChart'
-import {map} from 'lodash'
 
 class UserBoard extends Component {
   constructor(props) {
@@ -18,12 +17,11 @@ class UserBoard extends Component {
     return (
       <div>
         <ScoreList>
-          {
-            map(data, (value, key) => {
-            return (
-              <ScoreItem key={ key } name={value.name} value={value.value}></ScoreItem>
-            );
-          })}
+          <UserList>
+            <input className="name" placeholder="Name"/>
+            <input className="position" placeholder="Position"/>
+          </UserList>
+
           
         </ScoreList>
         <RadarChart data={ data }/>

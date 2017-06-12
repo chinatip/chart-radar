@@ -4,13 +4,21 @@ import styled, { css } from 'styled-components'
 
 export const ScoreBox = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
 `
+
+///// UserBoard
 
 export const ScoreList = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  background-color: grey;
+`
+
+export const UserList = styled.div`
+  width: 300px;
+  background-color: green;
 `
 
 ///// ScoreItem
@@ -20,10 +28,11 @@ export const ScoreItemWrapper = styled.div`
   justify-content: space-between;
   width: 280px;
   padding: 1%;
-  margin: 0.25%;
+  margin: 1%;
   align-items: baseline;
   box-shadow: 0 5px 20px -5px rgba(0, 0, 0, .15);
   border-radius: 15px;
+  background-color: white;
 `
 
 export const InputScore = styled.input`
