@@ -6,10 +6,20 @@ class ScoreItem extends Component {
     super();
   }
 
+  handleKeyPress = (e) => {
+    console.log(e)
+    if (e.key === 'Enter') {
+        this.props.updateLabel(this.props.id, e)
+    }
+  }
+
   render() {
     return (
       <ScoreItemWrapper>
-        <InputCriteria value={this.props.name}/>
+        <InputCriteria 
+          defaultValue={this.props.name}
+          onKeyPress={this.handleKeyPress}
+          onBlur={(e) => this.props.updateLabel(this.props.id, e)}/>
         <InputScore
           type="number"
           name="score"

@@ -21,10 +21,15 @@ export const UserList = styled.div`
   background-color: green;
 `
 
+export const ScoreItemListWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
 ///// ScoreItem
 
 export const ScoreItemWrapper = styled.div`
-  display: flex;
+  display: flex;  
   justify-content: space-between;
   width: 280px;
   padding: 1%;
@@ -59,5 +64,5 @@ export const DeleteButton = styled.button`
 
 export const RadarChartWrapper = styled.div`
   display: flex;
-  flex-direction: column;
+  // flex-direction: column;
 `

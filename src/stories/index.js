@@ -10,7 +10,7 @@ import Button from './Button';
 import Welcome from './Welcome';
 import ScoreBoard from '../ScoreBoard'
 import ScoreItem from '../ScoreItem'
-import RadarChart from '../RadarChart'
+import { RadarChartJS, RadarChartWithStateController, RadarReChartWithStateController } from '../RadarChart'
 
 storiesOf('Welcome', module).add('to Storybook', () => <Welcome showApp={linkTo('Button')} />);
 
@@ -18,21 +18,28 @@ storiesOf('Button', module)
   .add('with text', () => <Button onClick={action('clicked')}>Hello Button</Button>)
   .add('with some emoji', () => <Button onClick={action('clicked')}>😀 😎 👍 💯</Button>);
 
+
+const DEFAULT_CHART_DATA = [
+  {name: "X", value: "8"},
+  {name: "Dev", value: "3"},
+  {name: "Design", value: "10"},
+  {name: "Criteria", value: "4"},
+  {name: "Criteria", value: "5"}
+]
+
 storiesOf('ScoreBoard', module)
   .add('item', () => (
     <ScoreItem name={"Criteria 1 "}/>
   ))
   .add('chart', () => (
-    <RadarChart data={[{name: "X", value: "8"},
-                {name: "Dev", value: "3"},
-                {name: "Design", value: "10"},
-                {name: "Criteria", value: "4"},
-                {name: "Criteria", value: "5"}]}/>
+    <RadarChartJS data={DEFAULT_CHART_DATA}/>
+  ))
+  .add('chart with controller', () => (
+    <RadarChartWithStateController data={DEFAULT_CHART_DATA}/>
+  ))
+  .add('Rechart chart with controller', () => (
+    <RadarReChartWithStateController data={DEFAULT_CHART_DATA}/>
   ))
   .add('board', () => (
-    <ScoreBoard data={[{name: "Criteria", value: "8"},
-                {name: "Criteria", value: "8"},
-                {name: "Criteria", value: "8"},
-                {name: "Criteria", value: "8"},
-                {name: "Criteria", value: "8"}]}/>
+    <ScoreBoard data={DEFAULT_CHART_DATA}/>
   ))
