@@ -60,9 +60,11 @@ export const DeleteButton = styled.button`
 
 ////// RadarChart
 
-
-
 export const RadarChartWrapper = styled.div`
+  // display: flex;
+`
+
+export const RadarChartControllerWrapper = styled.div`
   display: flex;
   // flex-direction: column;
 `

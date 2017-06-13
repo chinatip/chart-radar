@@ -12,10 +12,9 @@ class ScoreBoard extends Component {
   }
 
   render() {
-    const {firebase, targets} = this.props;
     return (
       <ScoreBox>
-        <UserBoard firebase={firebase} targets={targets}/>
+        <UserBoard data={this.props.data}/>
       </ScoreBox>
     );
   }

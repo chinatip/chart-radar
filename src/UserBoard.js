@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {ScoreList, ScoreBox, CriteriaInput, ScoreInput, UserList} from './scoreboard-styles'
 import ScoreItem from './ScoreItem'
 import RadarChart from './RadarChart'
+import User from './User'
 
 class UserBoard extends Component {
   constructor(props) {
@@ -9,11 +10,6 @@ class UserBoard extends Component {
   }
 
   render() {
-    let data = [{name: "Criteria", value: "8"},
-                {name: "Criteria", value: "8"},
-                {name: "Criteria", value: "8"},
-                {name: "Criteria", value: "8"},
-                {name: "Criteria", value: "8"}]
     return (
       <div>
         <ScoreList>
@@ -21,10 +17,8 @@ class UserBoard extends Component {
             <input className="name" placeholder="Name"/>
             <input className="position" placeholder="Position"/>
           </UserList>
-
-          
         </ScoreList>
-        <RadarChart data={ data }/>
+        <RadarChart data={ [] }/>
       </div>
     );
   }

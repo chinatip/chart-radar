@@ -10,7 +10,8 @@ import Button from './Button';
 import Welcome from './Welcome';
 import ScoreBoard from '../ScoreBoard'
 import ScoreItem from '../ScoreItem'
-import { RadarChartJS, RadarChartWithStateController, RadarReChartWithStateController } from '../RadarChart'
+import User from '../User'
+import { RadarChartJS, RadarReChart, RadarChartWithStateController, RadarReChartWithStateController } from '../RadarChart'
 
 storiesOf('Welcome', module).add('to Storybook', () => <Welcome showApp={linkTo('Button')} />);
 
@@ -20,19 +21,37 @@ storiesOf('Button', module)
 
 
 const DEFAULT_CHART_DATA = [
-  {name: "X", value: "8"},
-  {name: "Dev", value: "3"},
-  {name: "Design", value: "10"},
-  {name: "Criteria", value: "4"},
-  {name: "Criteria", value: "5"}
+  { label: 'Math', value: 10 },
+  { label: 'Chinese', value: 8 },
+  { label: 'English', value: 9 },
+  { label: 'Geography', value: 3 },
+  { label: 'Physics', value: 7 },
+  { label: 'History', value: 7 },
+];
+
+const DEFAULT_USERS_DATA = [
+  {
+    fullname: 'Ranatchai Ch.',
+    stats: DEFAULT_CHART_DATA,
+    notes: []
+  },
+  {
+    fullname: 'Namtan Chinatip',
+    stats: DEFAULT_CHART_DATA,
+    notes: []
+  }
 ]
+
 
 storiesOf('ScoreBoard', module)
   .add('item', () => (
-    <ScoreItem name={"Criteria 1 "}/>
+    <ScoreItem name={'Criteria 1 '}/>
   ))
-  .add('chart', () => (
+  .add('chart.js', () => (
     <RadarChartJS data={DEFAULT_CHART_DATA}/>
+  ))
+  .add('recharts', () => (
+    <RadarReChart data={DEFAULT_CHART_DATA}/>
   ))
   .add('chart with controller', () => (
     <RadarChartWithStateController data={DEFAULT_CHART_DATA}/>
@@ -40,6 +59,14 @@ storiesOf('ScoreBoard', module)
   .add('Rechart chart with controller', () => (
     <RadarReChartWithStateController data={DEFAULT_CHART_DATA}/>
   ))
+  .add('User', () => (
+    <User data={{
+      fullname: 'Namtan Chinatip',
+      stats: DEFAULT_CHART_DATA,
+      notes: []
+      }}
+    />
+  ))
   .add('board', () => (
-    <ScoreBoard data={DEFAULT_CHART_DATA}/>
+    <ScoreBoard data={DEFAULT_USERS_DATA}/>
   ))

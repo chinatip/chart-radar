@@ -22,10 +22,9 @@ class ScoreItem extends Component {
           onBlur={(e) => this.props.updateLabel(this.props.id, e)}/>
         <InputScore
           type="number"
-          name="score"
           min="1"
           max="20"
-          defaultValue={this.props.value}
+          defaultValue={this.props.label}
           onChange={(e) => this.props.updateValue(this.props.id, e)}></InputScore>
         <DeleteButton>X</DeleteButton>
       </ScoreItemWrapper>
