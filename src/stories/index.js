@@ -21,6 +21,15 @@ storiesOf('Button', module)
 
 
 const DEFAULT_CHART_DATA = [
+  { label: 'Math', value: 8 },
+  { label: 'Chinese', value: 8 },
+  { label: 'English', value: 8 },
+  { label: 'Geography', value: 8 },
+  { label: 'Physics', value: 8 },
+  { label: 'History', value: 8 },
+];
+
+const DEFAULT_CHART_DATA2 = [
   { label: 'Math', value: 10 },
   { label: 'Chinese', value: 8 },
   { label: 'English', value: 9 },
@@ -37,7 +46,7 @@ const DEFAULT_USERS_DATA = [
   },
   {
     fullname: 'Namtan Chinatip',
-    stats: DEFAULT_CHART_DATA,
+    stats: DEFAULT_CHART_DATA2,
     notes: []
   }
 ]
@@ -45,7 +54,7 @@ const DEFAULT_USERS_DATA = [
 
 storiesOf('ScoreBoard', module)
   .add('item', () => (
-    <ScoreItem name={'Criteria 1 '}/>
+    <ScoreItem name={'Critetoria 1 '}/>
   ))
   .add('chart.js', () => (
     <RadarChartJS data={DEFAULT_CHART_DATA}/>
@@ -60,13 +69,9 @@ storiesOf('ScoreBoard', module)
     <RadarReChartWithStateController data={DEFAULT_CHART_DATA}/>
   ))
   .add('User', () => (
-    <User data={{
-      fullname: 'Namtan Chinatip',
-      stats: DEFAULT_CHART_DATA,
-      notes: []
-      }}
+    <User data={{fullname: "Namtan Chinatip"}}
     />
   ))
-  .add('board', () => (
+  .add('User with radar chart', () => (
     <ScoreBoard data={DEFAULT_USERS_DATA}/>
   ))

@@ -3,22 +3,23 @@ import styled, { css } from 'styled-components'
 ///// ScoreBoard
 
 export const ScoreBox = styled.div`
-  display: flex;
-  flex-direction: row;
+  // display: flex;
+  // flex-direction: row;
 `
 
 ///// UserBoard
 
-export const ScoreList = styled.div`
+export const UserList = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  background-color: grey;
+  width: 300px;
+  padding: 20px;
+  background-color: #e3e3e3;
 `
 
-export const UserList = styled.div`
-  width: 300px;
-  background-color: green;
+export const UserBoardWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
 `
 
 export const ScoreItemListWrapper = styled.div`

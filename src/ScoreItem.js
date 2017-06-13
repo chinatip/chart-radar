@@ -17,14 +17,14 @@ class ScoreItem extends Component {
     return (
       <ScoreItemWrapper>
         <InputCriteria 
-          defaultValue={this.props.name}
+          defaultValue={this.props.label}
           onKeyPress={this.handleKeyPress}
           onBlur={(e) => this.props.updateLabel(this.props.id, e)}/>
         <InputScore
           type="number"
           min="1"
           max="20"
-          defaultValue={this.props.label}
+          defaultValue={this.props.value}
           onChange={(e) => this.props.updateValue(this.props.id, e)}></InputScore>
         <DeleteButton>X</DeleteButton>
       </ScoreItemWrapper>

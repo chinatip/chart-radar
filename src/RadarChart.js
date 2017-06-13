@@ -130,7 +130,7 @@ export const ScoreItemList = ({ data, updateValue, updateLabel }) => {
           <ScoreItem
             id={key}
             key={key}
-            name={value.label}
+            label={value.label}
             value={value.value}
             data={data}
             updateValue={(key, e) => updateValue(key, e)}
