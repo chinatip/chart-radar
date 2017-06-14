@@ -10,6 +10,7 @@ const UserWrapper = styled.div`
   margin-bottom: 10px;
   border-radius: 50px;
   border: 0.2px solid #3db9df;
+  cursor: pointer;
 `
 
 class User extends Component {

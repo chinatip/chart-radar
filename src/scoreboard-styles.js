@@ -59,6 +59,13 @@ export const DeleteButton = styled.button`
   border-radius: 150px;
 `
 
+export const AddButton = styled.button`
+  margin: 10px;
+  background-color: #3db9df;
+  border: 5px solid #3db9df;
+  border-radius: 150px;
+`
+
 ////// RadarChart
 
 export const RadarChartWrapper = styled.div`

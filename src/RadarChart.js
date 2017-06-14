@@ -4,7 +4,7 @@ import * as ChartJS from "react-chartjs"
 import * as Rechart from 'recharts';
 import ScoreItem from './ScoreItem'
 import { map } from 'lodash'
-import { RadarChartWrapper, RadarChartControllerWrapper, ScoreItemListWrapper } from './scoreboard-styles'
+import { RadarChartWrapper, RadarChartControllerWrapper, ScoreItemListWrapper, AddButton } from './scoreboard-styles'
 
 console.log(ChartJS)
 // const RadarChart = Chart.Radar;
@@ -122,7 +122,7 @@ export const RadarChartJS = (props) => {
   )
 }
 
-export const ScoreItemList = ({ data, updateValue, updateLabel }) => {
+export const ScoreItemList = ({ data, updateValue, updateLabel ,deleteItem }) => {
   return (
     <ScoreItemListWrapper>
       {data.map((value, key) => {
@@ -134,20 +134,23 @@ export const ScoreItemList = ({ data, updateValue, updateLabel }) => {
             value={value.value}
             data={data}
             updateValue={(key, e) => updateValue(key, e)}
-            updateLabel={(key, e) => updateLabel(key, e)}></ScoreItem>
+            updateLabel={(key, e) => updateLabel(key, e)}
+            deleteItem={(key) => deleteItem(key)}></ScoreItem>
         )
       })}
+      <AddButton>+</AddButton>
     </ScoreItemListWrapper>
   )
 }
 
 const withChartController = (ChartComponent, chartOptions={}) => {
-  const ChartWithController = ({ data, updateLabel, updateValue }) => (
+  const ChartWithController = ({ data, updateLabel, updateValue, deleteItem }) => (
     <RadarChartControllerWrapper>
       <ScoreItemList
         data={data}
         updateValue={updateValue}
         updateLabel={updateLabel}
+        deleteItem={deleteItem}
       />
       <ChartComponent data={data} options={chartOptions}/>
     </RadarChartControllerWrapper>
@@ -187,12 +190,19 @@ const withStateController = (ChartComponent, chartOptions) => {
       }
     }
 
+    deleteItem = (key) => {
+      console.log()
+    }
+
+
+
     render() {
       return (
         <ChartWithController
           data={this.state.data}
           updateLabel={this.updateLabel}
           updateValue={this.updateValue}
+          deleteItem={this.deleteItem}
         />
       );
     }
@@ -203,7 +213,7 @@ const withStateController = (ChartComponent, chartOptions) => {
 export const RadarChartWithStateController = withStateController(RadarChartJS)
 export const RadarReChartWithStateController = withStateController(RadarReChart, { maxValue: 20 })
 
-export class RadarChartWithFirebaseController extends Component {
+/*export class RadarChartWithFirebaseController extends Component {
   static defaultProps = {
     firebasePath: '/chart/1234'
   };
@@ -222,9 +232,10 @@ export class RadarChartWithFirebaseController extends Component {
         data={this.props.data}
         onUpdateLabel={this.onUpdateLabel}
         onUpdateValue={this.onUpdateValue}
+        deleteItem={this.deleteItem}
       />
     );
   }
-}
+}*/
 
 export default RadarChartWithStateController

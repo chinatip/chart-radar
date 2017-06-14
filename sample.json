@@ -1,0 +1,26 @@
+{
+  "users": {
+    "1": {
+      "fullname": "Ranatchai Ch.",
+      "stats": {
+        "_1": { "label": "Math", "value": 10 },
+        "_2": { "label": "Chinese", "value": 8 },
+        "_3": { "label": "English", "value": 9 },
+        "_4": { "label": "Geography", "value": 3 },
+        "_5": { "label": "Physics", "value": 7 },
+        "_6": { "label": "History", "value": 7 }
+      }
+    },
+    "2": {
+      "fullname": "Namtan Chinatip",
+      "stats": {
+        "_1": { "label": "Math", "value": 7 },
+        "_2": { "label": "Chinese", "value": 9 },
+        "_3": { "label": "English", "value": 10 },
+        "_4": { "label": "Geography", "value": 6 },
+        "_5": { "label": "Physics", "value": 5 },
+        "_6": { "label": "History", "value": 3 }
+      }
+    }
+  }
+}
