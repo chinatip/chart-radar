@@ -61,7 +61,8 @@ export const RadarChartJS = (props) => {
   )
 }
 
-export const ScoreItemList = ({ data, updateValue, updateLabel ,addItem, deleteItem }) => {
+export const ScoreItemList = ({ data, updateValue, updateLabel , addItem, deleteItem }) => {
+  console.log(data)
   return (
     <ScoreItemListWrapper>
       {map(data, (value, key) => {
@@ -72,24 +73,24 @@ export const ScoreItemList = ({ data, updateValue, updateLabel ,addItem, deleteI
             label={value.label}
             value={value.value}
             data={data}
-            updateValue={(key, e) => updateValue(key, e)}
-            updateLabel={(key, e) => updateLabel(key, e)}
-            addItem={() => addItem()}
-            deleteItem={(key) => deleteItem(key)}></ScoreItem>
+            updateValue={updateValue}
+            updateLabel={updateLabel}
+            deleteItem={deleteItem}></ScoreItem>
         )
       })}
-      <AddButton >+</AddButton>
+      <AddButton onClick={addItem}>+</AddButton>
     </ScoreItemListWrapper>
   )
 }
 
 const withChartController = (ChartComponent, chartOptions={}) => {
-  const ChartWithController = ({ data, updateLabel, updateValue, deleteItem, addItem }) => (
+  const ChartWithController = ({ data, updateLabel, updateValue, addItem, deleteItem }) => (
     <RadarChartControllerWrapper>
       <ScoreItemList
         data={data}
         updateValue={updateValue}
         updateLabel={updateLabel}
+        addItem={addItem}
         deleteItem={deleteItem}
       />
       <ChartComponent data={Array.isArray(data)? data: toArray(data)} options={chartOptions}/>
@@ -108,35 +109,33 @@ const withStateController = (ChartComponent, chartOptions) => {
     constructor(props) {
       super();
       this.state = {
-        data: props.data || {}
+        data: props.data || []
       };
     }
 
     updateValue = (key, e) => {
-      let newData = {...this.state.data}
+      let newData = [...this.state.data]
       newData[key].value = e.target.value
       this.setState({data: newData})
-      // console.log('onUpdateValue',this.props.onUpdateValue)
-      if (this.props.onUpdateValue) {
-        this.props.onUpdateValue(key, e.target.value)
-      }
     }
 
     updateLabel = (key, e) => {
-      let newData = {...this.state.data}
+      let newData = [...this.state.data]
       newData[key].label = e.target.value
       this.setState({data: newData})
-      // console.log(key)
-      if (this.props.onUpdateLabel) {
-        this.props.onUpdateLabel(key, e.target.value)
-      }
     }
 
     deleteItem = (key) => {
-      console.log()
+      let newData = [...this.state.data]
+      newData.splice(key, 1)
+      this.setState({data: newData})
     }
 
-
+    addItem = () => {
+      let newData = [...this.state.data]
+      newData.push({ label: 'label', value: 5 })
+      this.setState({data: newData})
+    }
 
     render() {
       return (
@@ -145,6 +144,7 @@ const withStateController = (ChartComponent, chartOptions) => {
           updateLabel={this.updateLabel}
           updateValue={this.updateValue}
           deleteItem={this.deleteItem}
+          addItem={this.addItem}
         />
       );
     }
@@ -155,40 +155,43 @@ const withStateController = (ChartComponent, chartOptions) => {
 export const RadarChartWithStateController = withStateController(RadarChartJS)
 export const RadarReChartWithStateController = withStateController(RadarReChart, { maxValue: 20 })
 
-export const withFirebaseController = (ChartComponent, options) => {
-  const ChartWithStateController = withStateController(ChartComponent, options)
+export const withFirebaseController = (ChartComponent, chartOptions) => {
+  // const ChartWithStateController = withStateController(ChartComponent, options)
+  const ChartWithController = withChartController(ChartComponent, chartOptions)
   return class ChartWithFirebaseController extends Component {
     static defaultProps = {
       firebasePath: '/chart/1234'
     };
-    onUpdateValue = throttle((key, value) => {
+    onUpdateValue = (key, e) => {
+      const value = e.target.value
       const prevStats = this.props.data[key]
       const updatePath = this.props.firebasePath +  '/' + key
       this.props.firebase.update(updatePath, { ...prevStats, value: Number(value) })
-    }, 300)
+    }
 
-    onUpdateLabel = (key, value) => {
+    onUpdateLabel = (key, e) => {
+      const value = e.target.value
       const prevStats = this.props.data[key]
       const updatePath = this.props.firebasePath +  '/' + key
       this.props.firebase.update(updatePath, { ...prevStats, label: value })
     }
 
-    onAddItem = (value) => {
-      this.props.firebase.push({label: "label", value: 0})
+    onAddItem = () => {
+      this.props.firebase.push(this.props.firebasePath, {label: "label-" + Date.now(), value: 5})
     }
 
     onDeleteItem = (key) => {
-      this.props.firebase.remove(null)
+      this.props.firebase.remove(this.props.firebasePath +  '/' + key)
     } 
 
     render() {
       return (
-        <ChartWithStateController
+        <ChartWithController
           data={this.props.data}
-          onUpdateLabel={this.onUpdateLabel}
-          onUpdateValue={this.onUpdateValue}
-          onDeleteItem={this.onDeleteItem}
-          onAddItem={this.onAddItem}
+          updateLabel={this.onUpdateLabel}
+          updateValue={this.onUpdateValue}
+          deleteItem={this.onDeleteItem}
+          addItem={this.onAddItem}
         />
       );
     }

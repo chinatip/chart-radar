@@ -51,3 +51,4 @@ const DEFAULT_USERS_DATA = [
 }
 
 export default ScoreBoard
+

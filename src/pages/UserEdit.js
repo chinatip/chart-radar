@@ -15,17 +15,6 @@ const UserEditPage = ({ firebase, userProfile, userKey }) => {
   )
 }
 
-/*class UserEditPage extends Component{
-  render() {
-    if (!this.props.userProfile) return <div>Loading</div>
-    return (
-      <div>
-        Hello {this.props.userProfile.fullname}
-      </div>
-    )
-  }
-}*/
-
 export default compose(
   firebaseConnect((props, firebase) => {
     return ['/users/' + props.match.params.userId]

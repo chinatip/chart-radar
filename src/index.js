@@ -16,18 +16,3 @@ ReactDOM.render(
       </Router>
     </Provider>
   , document.getElementById('root'));
-
-
-// const UserEditPage = () => {}
-
-// compose(
-//   firebaseConnect((props, firebase) => {
-//     return ['/stats/' + props.params.userId]
-//   }),
-//   connect((state, props) => {
-//     const userStats = state.firebase.getIn('stats', props.params.userId)
-//     return {
-//       userStats: userStats
-//     }
-//   })
-// )(UserEditPage)

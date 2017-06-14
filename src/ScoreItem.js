@@ -26,7 +26,7 @@ class ScoreItem extends Component {
           max="20"
           defaultValue={this.props.value}
           onChange={(e) => this.props.updateValue(this.props.id, e)}></InputScore>
-        <DeleteButton>X</DeleteButton>
+        <DeleteButton onClick={() => this.props.deleteItem(this.props.id)}>X</DeleteButton>
       </ScoreItemWrapper>
     );
   }
