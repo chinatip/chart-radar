@@ -1,24 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import UserEdit from './pages/UserEdit'
-import registerServiceWorker from './registerServiceWorker';
 import './index.css';
 import { initStore } from './Store';
 import { Provider } from 'react-redux'
-import { Router, Route, BrowserHistory } from 'react-router'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 
 const store = initStore()
 
 ReactDOM.render(
-    <Provider store={store}>
-      {/*<Router>
-        <Route path="/" component={App}>
-          <Route path="edit/:userId" component={UserEdit} />
-        </Route>
-      </Router>*/}
-      <App/>
+    <Provider store={ store }>
+      <Router>
+          <Route path="/" component={ App } />
+      </Router>
     </Provider>
   , document.getElementById('root'));
 

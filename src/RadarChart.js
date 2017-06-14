@@ -3,13 +3,14 @@ import * as ChartJS from "react-chartjs"
 // import * as ChartJS2 from "react-chartjs-2"
 import * as Rechart from 'recharts';
 import ScoreItem from './ScoreItem'
-import { map } from 'lodash'
+import { map, toArray, throttle } from 'lodash'
 import { RadarChartWrapper, RadarChartControllerWrapper, ScoreItemListWrapper, AddButton } from './scoreboard-styles'
 
 console.log(ChartJS)
 // const RadarChart = Chart.Radar;
 
 export const RadarReChart = ({ data, options={} }) => {
+  console.log(data)
   return (
     <Rechart.RadarChart cx={300} cy={250} outerRadius={150} width={600} height={500} data={data}>
       <Rechart.PolarGrid />
@@ -19,68 +20,6 @@ export const RadarReChart = ({ data, options={} }) => {
     </Rechart.RadarChart>
   )
 }
-
-/*export const RadarChartJS2 = (props) => {
-  // let labels = [];
-  // let data = [];
-  // (props.data).forEach(function (item) {
-  //   labels.push(item.name)
-  //   data.push(item.value)
-  // })
-
-  // let chartData = {
-  //   labels: labels,
-  //   datasets: [
-  //     {
-  //       data: data,
-  //       backgroundColor: [
-  //         'rgba(0, 0, 0, 0.1)', 'rgba(0, 0, 0, 0.1)'
-  //       ],
-  //       borderColor: [
-  //         'rgba(255,99,132,1)', 'rgba(54, 162, 235, 1)'
-  //       ],
-  //       borderWidth: 1
-  //     }
-  //   ]
-  // };
-  // let chartOptions = {
-  //   options: props.options
-  // }
-  // console.log('chartData', chartData)
-
-  const data = {
-    labels: ['Eating', 'Drinking', 'Sleeping', 'Designing', 'Coding', 'Cycling', 'Running'],
-    datasets: [
-      {
-        label: 'My First dataset',
-        backgroundColor: 'rgba(179,181,198,0.2)',
-        borderColor: 'rgba(179,181,198,1)',
-        pointBackgroundColor: 'rgba(179,181,198,1)',
-        pointBorderColor: '#fff',
-        pointHoverBackgroundColor: '#fff',
-        pointHoverBorderColor: 'rgba(179,181,198,1)',
-        data: [65, 59, 90, 81, 56, 55, 40]
-      },
-      {
-        label: 'My Second dataset',
-        backgroundColor: 'rgba(255,99,132,0.2)',
-        borderColor: 'rgba(255,99,132,1)',
-        pointBackgroundColor: 'rgba(255,99,132,1)',
-        pointBorderColor: '#fff',
-        pointHoverBackgroundColor: '#fff',
-        pointHoverBorderColor: 'rgba(255,99,132,1)',
-        data: [28, 48, 40, 19, 96, 27, 100]
-      }
-    ]
-  };
-  return (
-    <RadarChartWrapper>
-     <ChartJS2.Radar
-        data={data}
-      />
-    </RadarChartWrapper>
-  )
-}*/
 
 export const RadarChartJS = (props) => {
   let labels = [];
@@ -122,10 +61,10 @@ export const RadarChartJS = (props) => {
   )
 }
 
-export const ScoreItemList = ({ data, updateValue, updateLabel ,deleteItem }) => {
+export const ScoreItemList = ({ data, updateValue, updateLabel ,addItem, deleteItem }) => {
   return (
     <ScoreItemListWrapper>
-      {data.map((value, key) => {
+      {map(data, (value, key) => {
         return (
           <ScoreItem
             id={key}
@@ -135,16 +74,17 @@ export const ScoreItemList = ({ data, updateValue, updateLabel ,deleteItem }) =>
             data={data}
             updateValue={(key, e) => updateValue(key, e)}
             updateLabel={(key, e) => updateLabel(key, e)}
+            addItem={() => addItem()}
             deleteItem={(key) => deleteItem(key)}></ScoreItem>
         )
       })}
-      <AddButton>+</AddButton>
+      <AddButton >+</AddButton>
     </ScoreItemListWrapper>
   )
 }
 
 const withChartController = (ChartComponent, chartOptions={}) => {
-  const ChartWithController = ({ data, updateLabel, updateValue, deleteItem }) => (
+  const ChartWithController = ({ data, updateLabel, updateValue, deleteItem, addItem }) => (
     <RadarChartControllerWrapper>
       <ScoreItemList
         data={data}
@@ -152,7 +92,7 @@ const withChartController = (ChartComponent, chartOptions={}) => {
         updateLabel={updateLabel}
         deleteItem={deleteItem}
       />
-      <ChartComponent data={data} options={chartOptions}/>
+      <ChartComponent data={Array.isArray(data)? data: toArray(data)} options={chartOptions}/>
     </RadarChartControllerWrapper>
   )
   return ChartWithController
@@ -168,23 +108,25 @@ const withStateController = (ChartComponent, chartOptions) => {
     constructor(props) {
       super();
       this.state = {
-        data: props.data || []
+        data: props.data || {}
       };
     }
 
     updateValue = (key, e) => {
-      let newData = [...this.state.data]
+      let newData = {...this.state.data}
       newData[key].value = e.target.value
       this.setState({data: newData})
+      // console.log('onUpdateValue',this.props.onUpdateValue)
       if (this.props.onUpdateValue) {
         this.props.onUpdateValue(key, e.target.value)
       }
     }
 
     updateLabel = (key, e) => {
-      let newData = [...this.state.data]
+      let newData = {...this.state.data}
       newData[key].label = e.target.value
       this.setState({data: newData})
+      // console.log(key)
       if (this.props.onUpdateLabel) {
         this.props.onUpdateLabel(key, e.target.value)
       }
@@ -213,29 +155,46 @@ const withStateController = (ChartComponent, chartOptions) => {
 export const RadarChartWithStateController = withStateController(RadarChartJS)
 export const RadarReChartWithStateController = withStateController(RadarReChart, { maxValue: 20 })
 
-/*export class RadarChartWithFirebaseController extends Component {
-  static defaultProps = {
-    firebasePath: '/chart/1234'
-  };
-  updateValue = (key, value) => {
-    this.props.firebase.update(this.props.firebasePath +  '/' + key + '/value' , value)
-  }
+export const withFirebaseController = (ChartComponent, options) => {
+  const ChartWithStateController = withStateController(ChartComponent, options)
+  return class ChartWithFirebaseController extends Component {
+    static defaultProps = {
+      firebasePath: '/chart/1234'
+    };
+    onUpdateValue = throttle((key, value) => {
+      const prevStats = this.props.data[key]
+      const updatePath = this.props.firebasePath +  '/' + key
+      this.props.firebase.update(updatePath, { ...prevStats, value: Number(value) })
+    }, 300)
 
-  onUpdateLabel = (key, value) => {
-    // updateWithFirebase
-    this.props.firebase.update(this.props.firebasePath +  '/' + key + '/label' , value)
-  }
+    onUpdateLabel = (key, value) => {
+      const prevStats = this.props.data[key]
+      const updatePath = this.props.firebasePath +  '/' + key
+      this.props.firebase.update(updatePath, { ...prevStats, label: value })
+    }
 
-  render() {
-    return (
-      <RadarChartWithStateController
-        data={this.props.data}
-        onUpdateLabel={this.onUpdateLabel}
-        onUpdateValue={this.onUpdateValue}
-        deleteItem={this.deleteItem}
-      />
-    );
+    onAddItem = (value) => {
+      this.props.firebase.push({label: "label", value: 0})
+    }
+
+    onDeleteItem = (key) => {
+      this.props.firebase.remove(null)
+    } 
+
+    render() {
+      return (
+        <ChartWithStateController
+          data={this.props.data}
+          onUpdateLabel={this.onUpdateLabel}
+          onUpdateValue={this.onUpdateValue}
+          onDeleteItem={this.onDeleteItem}
+          onAddItem={this.onAddItem}
+        />
+      );
+    }
   }
-}*/
+}
+
+export const RadarChartWithFirebaseController = withFirebaseController(RadarReChart, { maxValue: 20 })
 
 export default RadarChartWithStateController

@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { Switch, Route } from 'react-router-dom'
 import './App.css';
 import ScoreBoard from './ScoreBoard'
+import UserEdit from './pages/UserEdit'
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <ScoreBoard />
+        <Switch>
+          <Route exact path="/" component={ ScoreBoard }/>
+          <Route path="/edit/:userId" component={ UserEdit }/>
+        </Switch>
       </div>
     );
   }

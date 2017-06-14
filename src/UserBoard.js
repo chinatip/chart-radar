@@ -1,30 +1,28 @@
 import React, {Component} from 'react'
 import {
-  ScoreList,
-  ScoreBox,
-  CriteriaInput,
-  ScoreInput,
   UserList,
   UserBoardWrapper
 } from './scoreboard-styles'
-import ScoreItem from './ScoreItem'
 import User from './User'
-import {map} from 'lodash'
-import {RadarReChart} from './RadarChart'
-import { Link } from 'react-router'
+import { map } from 'lodash'
+import { RadarReChart } from './RadarChart'
+import { Link } from 'react-router-dom'
 
 class UserBoard extends Component {
   constructor(props) {
     super();
     console.log("props", props)
     this.state = {
-      selectedUser: props.data[0]
+      selectedUser: props.data[0],
+      idOfSelectedUser: 0
     }
   }
 
   updateSelectedUser = (key) => {
     console.log("key", key)
-    this.setState({selectedUser: this.props.data[key]})
+    this.setState({
+      selectedUser: this.props.data[key],
+      idOfSelectedUser: key})
   }
 
   render() {
@@ -46,7 +44,7 @@ class UserBoard extends Component {
             maxValue: 10
           }}
             data={this.state.selectedUser.stats}/>
-          {/*<Link to="/edit">
+          <Link to={"/edit/" + this.state.idOfSelectedUser}>
             <button
               style={{
               color: "white",
@@ -58,7 +56,7 @@ class UserBoard extends Component {
               }}>
               Edit
             </button>
-          </Link>*/}
+          </Link>
         </div>
       </UserBoardWrapper>
     );
