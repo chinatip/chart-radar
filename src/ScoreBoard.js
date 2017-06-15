@@ -1,17 +1,11 @@
-import React, { Component } from 'react'
-import { ScoreBox } from './scoreboard-styles'
+import React, {Component} from 'react'
+import {ScoreBox} from './scoreboard-styles'
 import UserBoard from './UserBoard'
+import {compose} from 'redux'
+import {connect} from 'react-redux'
+import {firebaseConnect, dataToJS} from 'react-redux-firebase'
 
-class ScoreBoard extends Component {
-  constructor(props) {
-    super();
-  }
-
-  
-
-
-  render() {
-    const DEFAULT_CHART_DATA = [
+const DEFAULT_CHART_DATA = [
   { label: 'Math', value: 8 },
   { label: 'Chinese', value: 8 },
   { label: 'English', value: 8 },
@@ -41,14 +35,25 @@ const DEFAULT_USERS_DATA = [
     notes: []
   }
 ]
-    return (
-      <ScoreBox>
-        <UserBoard data={DEFAULT_USERS_DATA}/>
-        {/*<UserBoard data={this.props.data}/>*/}
-      </ScoreBox>
-    );
-  }
+
+
+const ScoreBoard = ({firebase, usersData}) => {
+  console.log("usersData", usersData)
+  if (!usersData) return <div>Loading</div>
+  return (
+    <ScoreBox>
+      <UserBoard data={usersData}/> 
+    </ScoreBox>
+  )
 }
 
-export default ScoreBoard
 
+// export default ScoreBoard
+
+export default compose(firebaseConnect(['/users']), connect(
+  ({ firebase }, props) => {
+    console.log('firebase', firebase)
+    const usersData = dataToJS(firebase, '/users');
+    console.log('usersData', usersData)
+    return { usersData }
+  }))(ScoreBoard)

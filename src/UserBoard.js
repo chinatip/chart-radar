@@ -4,7 +4,7 @@ import {
   UserBoardWrapper
 } from './scoreboard-styles'
 import User from './User'
-import { map } from 'lodash'
+import { map, toArray } from 'lodash'
 import { RadarReChart } from './RadarChart'
 import { Link } from 'react-router-dom'
 
@@ -13,7 +13,7 @@ class UserBoard extends Component {
     super();
     console.log("props", props)
     this.state = {
-      selectedUser: props.data[0],
+      selectedUser: props.data[1],
       idOfSelectedUser: 0
     }
   }
@@ -22,28 +22,30 @@ class UserBoard extends Component {
     console.log("key", key)
     this.setState({
       selectedUser: this.props.data[key],
-      idOfSelectedUser: key})
+      idOfSelectedUser: key
+    })
   }
 
   render() {
+    console.log('this.state.selectedUser', this.state.selectedUser)
+
     return (
       <UserBoardWrapper>
         <UserList>
           {map(this.props.data, (value, key) => {
-            return (<User
-              key={key}
-              id={key}
-              data={value}
-              selected={value.fullname === this.state.selectedUser.fullname}
-              updateSelectedUser={(key) => this.updateSelectedUser(key)}/>)
+            return (
+              <User
+                key={key}
+                id={key}
+                data={value}
+                selected={value.fullname === this.state.selectedUser.fullname}
+                updateSelectedUser={(key) => this.updateSelectedUser(key)}/>)
           })}
         </UserList>
         <div>
           <RadarReChart
-            options={{
-            maxValue: 10
-          }}
-            data={this.state.selectedUser.stats}/>
+            options={{ maxValue: 10 }}
+            data={Array.isArray( this.state.selectedUser.stats)? this.state.selectedUser.stats: toArray(this.state.selectedUser.stats)}/>
           <Link to={"/edit/" + this.state.idOfSelectedUser}>
             <button
               style={{

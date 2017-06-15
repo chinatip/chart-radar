@@ -22,9 +22,14 @@ export default compose(
   connect((state, props) => {
     const userKey = props.match.params.userId
     const userProfile = dataToJS(state.firebase, '/users/' + userKey);
+
+    console.log('userProfile', userProfile)
+
     return {
       userKey,
       userProfile,      
     }
   })
 )(UserEditPage)
+
+// export default UserEditPage

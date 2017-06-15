@@ -5,12 +5,13 @@ import * as Rechart from 'recharts';
 import ScoreItem from './ScoreItem'
 import { map, toArray, throttle } from 'lodash'
 import { RadarChartWrapper, RadarChartControllerWrapper, ScoreItemListWrapper, AddButton } from './scoreboard-styles'
+import { Link } from 'react-router-dom'
 
 console.log(ChartJS)
 // const RadarChart = Chart.Radar;
 
 export const RadarReChart = ({ data, options={} }) => {
-  console.log(data)
+  console.log('RadarReChart.data', data)
   return (
     <Rechart.RadarChart cx={300} cy={250} outerRadius={150} width={600} height={500} data={data}>
       <Rechart.PolarGrid />
@@ -79,6 +80,7 @@ export const ScoreItemList = ({ data, updateValue, updateLabel , addItem, delete
         )
       })}
       <AddButton onClick={addItem}>+</AddButton>
+      <Link to={"/"}>Home</Link>
     </ScoreItemListWrapper>
   )
 }

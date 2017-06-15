@@ -1,4 +1,17 @@
-import styled from 'styled-components'
+import styled, { injectGlobal } from 'styled-components'
+
+//// global
+
+export const GlobalStyles = ({ theme }) => {
+    injectGlobal`
+        body {
+            
+        }
+    `
+
+    return null
+}
+
 
 ///// ScoreBoard
 
