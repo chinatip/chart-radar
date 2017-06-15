@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import { ScoreItemListWrapper, AddButton } from './scoreboard-styles';
 
 export const EditScoreMenu = ({ data, updateValue, updateLabel , addItem, deleteItem }) => {
-  console.log(data)
   return (
     <ScoreItemListWrapper>
       {map(data, (value, key) => {

@@ -28,8 +28,6 @@ class ScoreItem extends Component {
     this.setState({
       value: newValue
     })
-
-    console.log("value", newValue)
   }
 
   render() {

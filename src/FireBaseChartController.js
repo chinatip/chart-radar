@@ -1,4 +1,4 @@
-import { toArray } from 'lodash';
+import { map, toArray } from 'lodash';
 import { Link } from 'react-router-dom';
 import React, { Component } from 'react';
 import { RadarRechart } from './RadarRechart';
@@ -40,12 +40,29 @@ export const withFirebaseController = (ChartComponent, chartOptions) => {
     }
 
     onAddItem = () => {
-      this.props.firebase.push(this.props.firebasePath, {label: "label-" + Date.now(), value: 5})
+      let labels = []
+      map(this.props.data, (value, key) => {
+        let label = value.label
+        console.log('label', label)
+        if(label.length > 6){
+          if(label.includes("label-")) {
+            let num = parseInt(label.substr(6, label.length))
+            labels.push(num)
+          }
+        }
+      })
+      let newLabel = this.generateLabel(labels.sort(function(a,b){return a - b}))
+      console.log("new Label AddItem: ", newLabel)
+      this.props.firebase.push(this.props.firebasePath, {label: "label-" + newLabel, value: 5})
     }
 
     onDeleteItem = (key) => {
       this.props.firebase.remove(this.props.firebasePath +  '/' + key)
-    } 
+    }
+
+    generateLabel(nums) {
+      return nums[nums.length - 1] + 1
+    }
 
     render() {
       return (
