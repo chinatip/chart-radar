@@ -27,15 +27,13 @@ export const withFirebaseController = (ChartComponent, chartOptions) => {
     static defaultProps = {
       firebasePath: '/chart/1234'
     };
-    onUpdateValue = (key, e) => {
-      const value = e.target.value
+    onUpdateValue = (key, value) => {
       const prevStats = this.props.data[key]
       const updatePath = this.props.firebasePath +  '/' + key
       this.props.firebase.update(updatePath, { ...prevStats, value: Number(value) })
     }
 
-    onUpdateLabel = (key, e) => {
-      const value = e.target.value
+    onUpdateLabel = (key, value) => {
       const prevStats = this.props.data[key]
       const updatePath = this.props.firebasePath +  '/' + key
       this.props.firebase.update(updatePath, { ...prevStats, label: value })

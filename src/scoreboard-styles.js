@@ -1,4 +1,4 @@
-import styled, { injectGlobal } from 'styled-components'
+import styled, { css, injectGlobal } from 'styled-components'
 
 //// global
 
@@ -24,6 +24,7 @@ export const ScoreBox = styled.div`
 
 export const UserList = styled.div`
   display: flex;
+  flex-wrap: wrap;
   flex-direction: column;
   width: 300px;
   padding: 20px;
@@ -38,16 +39,17 @@ export const UserBoardWrapper = styled.div`
 export const ScoreItemListWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  padding: 10px;
+  background-color: black;
+  height: 100%;
 `
 
 ///// ScoreItem
 
 export const ScoreItemWrapper = styled.div`
   display: flex;  
-  justify-content: space-between;
-  width: 280px;
-  padding: 1%;
-  margin: 1%;
+  padding: 5px;
+  margin: 1% 0 1% 0;
   align-items: baseline;
   box-shadow: 0 5px 20px -5px rgba(0, 0, 0, .15);
   border-radius: 15px;
@@ -57,6 +59,7 @@ export const ScoreItemWrapper = styled.div`
 export const InputScore = styled.input`
   border: 1px solid #3db9df;
   border-radius: 5px;
+  margin: 10px;
 `
 
 export const InputCriteria = styled.input`
@@ -65,15 +68,34 @@ export const InputCriteria = styled.input`
   margin: 10px;
 `
 
+const ButtonItem = css`
+  width: 30px;
+  border-radius: 20px;
+  margin: 5px;
+  color: white;
+`
+
 export const DeleteButton = styled.button`
-  margin: 10px;
+  ${ ButtonItem }
+  margin-right: 10px;
   background-color: #ff5c5c;
   border: 5px solid #ff5c5c;
-  border-radius: 150px;
+`
+
+export const PlusButton = styled.button`
+  ${ ButtonItem }
+  background-color: #ff5c5c;
+  border: 5px solid #ff5c5c;
+
+`
+
+export const MinusButton = styled.button`
+  ${ ButtonItem }
+  background-color: #ff5c5c;
+  border: 5px solid #ff5c5c;
 `
 
 export const AddButton = styled.button`
-  margin: 10px;
   background-color: #3db9df;
   border: 5px solid #3db9df;
   border-radius: 150px;

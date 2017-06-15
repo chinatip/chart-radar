@@ -1,9 +1,12 @@
 import React, {Component} from 'react'
-import {ScoreItemWrapper, InputScore, InputCriteria, DeleteButton} from './scoreboard-styles'
+import {ScoreItemWrapper, InputScore, InputCriteria, DeleteButton, PlusButton, MinusButton} from './scoreboard-styles'
 
 class ScoreItem extends Component {
   constructor(props) {
     super();
+    this.state = {
+      value: props.value
+    }
   }
 
   handleKeyPress = (e) => {
@@ -13,19 +16,34 @@ class ScoreItem extends Component {
     }
   }
 
+  handleUpdateValue = (id, e) => {
+    let newValue = parseInt(this.props.value);
+    if(e == "+" && newValue < 20) {
+      newValue = newValue + 1
+    } else if(e == "-" && newValue > 1) {
+      newValue = newValue - 1
+    }
+    this.props.updateValue(id, newValue)
+
+    this.setState({
+      value: newValue
+    })
+
+    console.log("value", newValue)
+  }
+
   render() {
     return (
       <ScoreItemWrapper>
         <InputCriteria 
           defaultValue={this.props.label}
           onKeyPress={this.handleKeyPress}
-          onBlur={(e) => this.props.updateLabel(this.props.id, e)}/>
+          onBlur={(e) => this.props.updateLabel(this.props.id, e.target.value)}/>
         <InputScore
           type="number"
-          min="1"
-          max="20"
-          defaultValue={this.props.value}
-          onChange={(e) => this.props.updateValue(this.props.id, e)}></InputScore>
+          value={this.state.value}></InputScore>
+        <PlusButton onClick={this.handleUpdateValue.bind(this, this.props.id, "+")}>+</PlusButton>
+        <MinusButton onClick={this.handleUpdateValue.bind(this, this.props.id, "-")}>-</MinusButton>
         <DeleteButton onClick={() => this.props.deleteItem(this.props.id)}>X</DeleteButton>
       </ScoreItemWrapper>
     );
