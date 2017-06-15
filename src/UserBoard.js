@@ -12,7 +12,7 @@ class UserBoard extends Component {
   constructor(props) {
     super();
     this.state = {
-      selectedUser: props.data[1],
+      selectedUser: props.data[0],
       idOfSelectedUser: 0
     }
   }
