@@ -1,17 +1,16 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
 import {
   UserList,
   UserBoardWrapper
-} from './scoreboard-styles'
+} from './scoreboard-styles';
 import User from './User'
-import { map, toArray } from 'lodash'
-import { RadarReChart } from './RadarChart'
-import { Link } from 'react-router-dom'
+import { map, toArray } from 'lodash';
+import { RadarRechart } from './RadarRechart';
+import { Link } from 'react-router-dom';
 
 class UserBoard extends Component {
   constructor(props) {
     super();
-    console.log("props", props)
     this.state = {
       selectedUser: props.data[1],
       idOfSelectedUser: 0
@@ -19,7 +18,6 @@ class UserBoard extends Component {
   }
 
   updateSelectedUser = (key) => {
-    console.log("key", key)
     this.setState({
       selectedUser: this.props.data[key],
       idOfSelectedUser: key
@@ -27,8 +25,6 @@ class UserBoard extends Component {
   }
 
   render() {
-    console.log('this.state.selectedUser', this.state.selectedUser)
-
     return (
       <UserBoardWrapper>
         <UserList>
@@ -43,7 +39,7 @@ class UserBoard extends Component {
           })}
         </UserList>
         <div>
-          <RadarReChart
+          <RadarRechart
             options={{ maxValue: 10 }}
             data={Array.isArray( this.state.selectedUser.stats)? this.state.selectedUser.stats: toArray(this.state.selectedUser.stats)}/>
           <Link to={"/edit/" + this.state.idOfSelectedUser}>

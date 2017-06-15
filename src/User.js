@@ -1,5 +1,5 @@
-import React, {Component} from 'react'
-import styled from 'styled-components'
+import React, { Component } from 'react';
+import styled from 'styled-components';
 
 const UserWrapper = styled.div`
   display: flex;

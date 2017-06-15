@@ -1,11 +1,12 @@
 import React from 'react';
-import { compose } from 'redux'
-import { connect } from 'react-redux'
-import { firebaseConnect, dataToJS } from 'react-redux-firebase'
-import { RadarChartWithFirebaseController } from '../RadarChart'
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { firebaseConnect, dataToJS, isLoaded, isEmpty } from 'react-redux-firebase';
+import { RadarChartWithFirebaseController } from '../FireBaseChartController';
 
 const UserEditPage = ({ firebase, userProfile, userKey }) => {
-  if (!userProfile) return <div>Loading</div>
+  if (!isLoaded(userProfile)) return <div>Loading</div>
+  if (isEmpty(userProfile)) return <div>User not found</div>
   return (
     <RadarChartWithFirebaseController
       firebase={firebase}
@@ -22,9 +23,6 @@ export default compose(
   connect((state, props) => {
     const userKey = props.match.params.userId
     const userProfile = dataToJS(state.firebase, '/users/' + userKey);
-
-    console.log('userProfile', userProfile)
-
     return {
       userKey,
       userProfile,      
