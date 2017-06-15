@@ -12,7 +12,7 @@ class UserBoard extends Component {
   constructor(props) {
     super();
     this.state = {
-      selectedUser: props.data[1],
+      selectedUser: props.data[0],
       idOfSelectedUser: 0
     }
   }
@@ -40,7 +40,7 @@ class UserBoard extends Component {
         </UserList>
         <div>
           <RadarRechart
-            options={{ maxValue: 10 }}
+            options={{ maxValue: 20 }}
             data={Array.isArray( this.state.selectedUser.stats)? this.state.selectedUser.stats: toArray(this.state.selectedUser.stats)}/>
           <Link to={"/edit/" + this.state.idOfSelectedUser}>
             <button
