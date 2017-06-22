@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import {
-  UserList,
-  UserBoardWrapper
+  Menu,
+  Logo,
+  UserBoardWrapper,
+  UserListWrapper
 } from './scoreboard-styles';
 import User from './User'
 import { map, toArray } from 'lodash';
@@ -27,18 +29,23 @@ class UserBoard extends Component {
   render() {
     return (
       <UserBoardWrapper>
-        <UserList>
-          {map(this.props.data, (value, key) => {
-            return (
-              <User
-                key={key}
-                id={key}
-                data={value}
-                selected={value.fullname === this.state.selectedUser.fullname}
-                updateSelectedUser={(key) => this.updateSelectedUser(key)}/>)
-          })}
-        </UserList>
-        <div>
+        <Menu>
+          <Logo />
+          <Link to={"/new"}>
+            <button> Add User </button>
+          </Link>
+          <UserListWrapper>
+            {map(this.props.data, (value, key) => {
+              return (
+                <User
+                  key={key}
+                  id={key}
+                  data={value}
+                  selected={value.fullname === this.state.selectedUser.fullname}
+                  updateSelectedUser={(key) => this.updateSelectedUser(key)}/>)
+            })}
+          </UserListWrapper>
+        </Menu>
           <RadarRechart
             options={{ maxValue: 20 }}
             data={Array.isArray( this.state.selectedUser.stats)? this.state.selectedUser.stats: toArray(this.state.selectedUser.stats)}/>
@@ -51,11 +58,11 @@ class UserBoard extends Component {
               borderColor: "10px solid #3db9df",
               backgroundColor: "#3db9df",
               cursor: "pointer"
-              }}>
+              }}
+              components={{data: this.props.data}}>
               Edit
             </button>
           </Link>
-        </div>
       </UserBoardWrapper>
     );
   }

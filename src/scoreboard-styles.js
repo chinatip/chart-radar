@@ -1,34 +1,45 @@
-import styled, { css, injectGlobal } from 'styled-components'
+import styled, { css, injectGlobal, withTheme, ThemeProvider } from 'styled-components'
 
 //// global
 
 export const GlobalStyles = ({ theme }) => {
     injectGlobal`
         body {
-            
+          margin: 0;
         }
     `
 
     return null
 }
 
-
-///// ScoreBoard
-
-export const ScoreBox = styled.div`
-  // display: flex;
-  // flex-direction: row;
-`
-
 ///// UserBoard
 
-export const UserList = styled.div`
+export const Logo = styled.img`
+  width: 100%;
+  height: 100px;
+  margin-bottom: 30px;
+`
+
+export const Menu = styled.div`
+  position: relative;
+  height: 100vh;
+  width: 250px;
+  padding: 1.2rem;
   display: flex;
-  flex-wrap: wrap;
   flex-direction: column;
-  width: 300px;
-  padding: 20px;
+  width: 220px;
   background-color: #e3e3e3;
+  padding: 10px;
+  box-sizing: border-box;
+  
+`
+
+export const UserListWrapper = styled.div`
+  position: relative;
+  height: 50%;
+  min-height: 220px;
+  overflow-y: auto;
+  padding-right: 5px;
 `
 
 export const UserBoardWrapper = styled.div`

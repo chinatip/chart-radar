@@ -21,7 +21,7 @@ export const EditScoreMenu = ({ data, updateValue, updateLabel , addItem, delete
         )
       })}
       <AddButton onClick={addItem}>+</AddButton>
-      <Link to={"/"}>Home</Link>
+      <Link to={"/"}><button>Home</button></Link>
     </ScoreItemListWrapper>
   )
 }

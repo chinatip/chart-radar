@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import {ScoreBox} from './scoreboard-styles'
 import UserBoard from './UserBoard'
 import {compose} from 'redux'
 import {connect} from 'react-redux'
@@ -41,9 +40,7 @@ const ScoreBoard = ({firebase, usersData}) => {
   console.log("usersData", usersData)
   if (!usersData) return <div>Loading</div>
   return (
-    <ScoreBox>
-      <UserBoard data={usersData}/> 
-    </ScoreBox>
+    <UserBoard data={usersData}/> 
   )
 }
 

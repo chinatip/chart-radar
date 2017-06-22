@@ -11,7 +11,6 @@ import Welcome from './Welcome';
 import ScoreBoard from '../ScoreBoard'
 import ScoreItem from '../ScoreItem'
 import User from '../User'
-import { RadarChartJS, RadarReChart, RadarChartWithStateController, RadarReChartWithStateController } from '../RadarChart'
 
 storiesOf('Welcome', module).add('to Storybook', () => <Welcome showApp={linkTo('Button')} />);
 
@@ -59,15 +58,6 @@ storiesOf('ScoreBoard', module)
   .add('chart.js', () => (
     <RadarChartJS data={DEFAULT_CHART_DATA}/>
   ))
-  .add('recharts', () => (
-    <RadarReChart data={DEFAULT_CHART_DATA}/>
-  ))
-  .add('chart with controller', () => (
-    <RadarChartWithStateController data={DEFAULT_CHART_DATA}/>
-  ))
-  .add('Rechart chart with controller', () => (
-    <RadarReChartWithStateController data={DEFAULT_CHART_DATA}/>
-  ))
   .add('User', () => (
     <User data={{fullname: "Namtan Chinatip"}}
     />
@@ -75,3 +65,4 @@ storiesOf('ScoreBoard', module)
   .add('User with radar chart', () => (
     <ScoreBoard data={DEFAULT_USERS_DATA}/>
   ))
+  
