@@ -47,7 +47,7 @@ const EditUserPage = ({ props, firebase, userProfile, userKey }) => {
       <EditUserFullname 
         data={userProfile.fullname}
         firebase={firebase}
-        firebasePath={"/users/" + userKey + "/fullname"}
+        firebasePath={"/users/" + userKey}
       />
       <RadarChartWithFirebaseController
         firebase={firebase}

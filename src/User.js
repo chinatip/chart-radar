@@ -15,11 +15,14 @@ const UserWrapper = styled.div`
 class User extends Component {
   constructor(props) {
     super();
+    // console.log("User Props ID", props.id)
   }
 
   render() {
     return (
-      <UserWrapper selected={this.props.selected} onMouseOver={(key) => this.props.updateSelectedUser(this.props.id)}>
+      <UserWrapper 
+        selected={this.props.selected} 
+        onMouseOver={(key) => this.props.updateSelectedUser(this.props.id)}>
         {this.props.data.fullname}
       </UserWrapper>
     );

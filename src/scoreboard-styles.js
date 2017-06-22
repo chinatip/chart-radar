@@ -20,7 +20,7 @@ export const Logo = styled.img`
   margin-bottom: 30px;
 `
 
-export const Menu = styled.div`
+export const MenuWrapper = styled.div`
   position: relative;
   height: 100vh;
   width: 250px;

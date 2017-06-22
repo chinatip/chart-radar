@@ -43,7 +43,6 @@ export const withFirebaseController = (ChartComponent, chartOptions) => {
       let labels = []
       map(this.props.data, (value, key) => {
         let label = value.label
-        console.log('label', label)
         if(label.length > 6){
           if(label.includes("label-")) {
             let num = parseInt(label.substr(6, label.length))
@@ -52,7 +51,6 @@ export const withFirebaseController = (ChartComponent, chartOptions) => {
         }
       })
       let newLabel = this.generateLabel(labels.sort(function(a,b){return a - b}))
-      console.log("new Label AddItem: ", newLabel)
       this.props.firebase.push(this.props.firebasePath, {label: "label-" + newLabel, value: 5})
     }
 
@@ -61,6 +59,7 @@ export const withFirebaseController = (ChartComponent, chartOptions) => {
     }
 
     generateLabel(nums) {
+      if (nums.length == 0) return 1;
       return nums[nums.length - 1] + 1
     }
 
