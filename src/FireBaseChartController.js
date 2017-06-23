@@ -1,5 +1,4 @@
 import { map, toArray } from 'lodash';
-import { Link } from 'react-router-dom';
 import React, { Component } from 'react';
 import { RadarRechart } from './RadarRechart';
 import { EditScoreMenu } from './EditScoreMenu';

@@ -15,10 +15,10 @@ const UserWrapper = styled.div`
 const UserMenu = ({id, data, selected, updateSelectedUser}) => {
   return (
     <UserWrapper 
-        selected={selected} 
-        onMouseOver={(key) => updateSelectedUser(id)}>
-        {data.fullname}
-      </UserWrapper>
+      selected={selected} 
+      onMouseOver={(key) => updateSelectedUser(id)}>
+      {data.fullname}
+    </UserWrapper>
   )
 }
 

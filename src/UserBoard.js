@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import { UserBoardWrapper, EditButton } from './scoreboard-styles';
-import User from './User'
 import Menu from './Menu'
-import { map, toArray } from 'lodash';
+import { toArray } from 'lodash';
 import { RadarRechart } from './RadarRechart';
 import { Link } from 'react-router-dom';
 
@@ -26,6 +25,7 @@ class UserBoard extends Component {
     const {firebase} = this.props;
     const newData = {
       "fullname": "New User",
+      "position": "Undefined",
       "stats": {
         "0": { "label": "label-1", "value": 8 },
         "1": { "label": "label-2", "value": 8 },

@@ -1,4 +1,4 @@
-import styled, { css, injectGlobal, withTheme, ThemeProvider } from 'styled-components'
+import styled, { css, injectGlobal } from 'styled-components'
 
 //// global
 

@@ -3,7 +3,6 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firebaseConnect, dataToJS, isLoaded, isEmpty } from 'react-redux-firebase';
 import { RadarChartWithFirebaseController } from '../FireBaseChartController';
-import { Link } from 'react-router-dom';
 import Menu from '../Menu'
 
 class EditUserFullname extends Component {
@@ -25,7 +24,7 @@ class EditUserFullname extends Component {
   }
   
   updateFullname = () => {
-    const {firebase, firebasePath, data} = this.props;
+    const {firebase, firebasePath} = this.props;
     firebase.update(firebasePath, {fullname: this.state.fullname})
   }
 
@@ -53,6 +52,7 @@ const EditUserPage = ({ props, firebase, userProfile, userKey }) => {
     <div style={{display: "flex"}}>
       <Menu isHome={false} />
       <div style={{display: "flex", flexDirection: "column"}}>
+        !!!! Fix -- Cannot update label !!!
         <EditUserFullname 
           data={userProfile.fullname}
           firebase={firebase}

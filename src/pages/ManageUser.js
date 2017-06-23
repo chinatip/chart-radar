@@ -1,13 +1,11 @@
 import React, {Component} from 'react';
-import { Link } from 'react-router-dom';
-import { Logo, MenuWrapper } from '../scoreboard-styles'
 import Menu from '../Menu'
 import {compose} from 'redux'
 import {connect} from 'react-redux'
 import {firebaseConnect, dataToJS} from 'react-redux-firebase'
 import User from '../User'
 import { map } from 'lodash';
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 const UserWrapper = styled.div`
   width: 200px;
