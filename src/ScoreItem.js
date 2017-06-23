@@ -18,9 +18,9 @@ class ScoreItem extends Component {
 
   handleUpdateValue = (id, e) => {
     let newValue = parseInt(this.props.value);
-    if(e == "+" && newValue < 20) {
+    if(e === "+" && newValue < 20) {
       newValue = newValue + 1
-    } else if(e == "-" && newValue > 1) {
+    } else if(e === "-" && newValue > 1) {
       newValue = newValue - 1
     }
     this.props.updateValue(id, newValue)

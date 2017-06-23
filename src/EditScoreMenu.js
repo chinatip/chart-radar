@@ -1,7 +1,6 @@
 import React from 'react';
 import { map } from 'lodash';
 import ScoreItem from './ScoreItem';
-import { Link } from 'react-router-dom';
 import { ScoreItemListWrapper, AddButton } from './scoreboard-styles';
 
 export const EditScoreMenu = ({ data, updateValue, updateLabel , addItem, deleteItem }) => {
@@ -21,7 +20,6 @@ export const EditScoreMenu = ({ data, updateValue, updateLabel , addItem, delete
         )
       })}
       <AddButton onClick={addItem}>+</AddButton>
-      <Link to={"/"}><button>Home</button></Link>
     </ScoreItemListWrapper>
   )
 }

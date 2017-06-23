@@ -3,6 +3,8 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firebaseConnect, dataToJS, isLoaded, isEmpty } from 'react-redux-firebase';
 import { RadarChartWithFirebaseController } from '../FireBaseChartController';
+import { Link } from 'react-router-dom';
+import Menu from '../Menu'
 
 class EditUserFullname extends Component {
   constructor(props) {
@@ -30,6 +32,7 @@ class EditUserFullname extends Component {
   render() {
     return (
       <div>
+        <h1>Edit User</h1>
         {this.props.data}
         <br />
         <input 
@@ -47,17 +50,20 @@ const EditUserPage = ({ props, firebase, userProfile, userKey }) => {
   if (!isLoaded(userProfile)) return <div>Loading</div>
   if (isEmpty(userProfile)) return <div>User not found</div>
   return (
-    <div>
-      <EditUserFullname 
-        data={userProfile.fullname}
-        firebase={firebase}
-        firebasePath={"/users/" + userKey}
-      />
-      <RadarChartWithFirebaseController
-        firebase={firebase}
-        data={userProfile.stats}
-        firebasePath={"/users/" + userKey + "/stats"}
-      />
+    <div style={{display: "flex"}}>
+      <Menu isHome={false} />
+      <div style={{display: "flex", flexDirection: "column"}}>
+        <EditUserFullname 
+          data={userProfile.fullname}
+          firebase={firebase}
+          firebasePath={"/users/" + userKey}
+        />
+        <RadarChartWithFirebaseController
+          firebase={firebase}
+          data={userProfile.stats}
+          firebasePath={"/users/" + userKey + "/stats"}
+        />
+      </div>
     </div>
   )
 }

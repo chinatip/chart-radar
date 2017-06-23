@@ -22,18 +22,33 @@ class UserBoard extends Component {
     })
   }
 
+  addUser = () => {
+    const {firebase} = this.props;
+    const newData = {
+      "fullname": "New User",
+      "stats": {
+        "0": { "label": "label-1", "value": 8 },
+        "1": { "label": "label-2", "value": 8 },
+        "2": { "label": "label-3", "value": 8 },
+        "3": { "label": "label-4", "value": 8 },
+        "4": { "label": "label-5", "value": 8 }
+      }
+    }
+    firebase.push('/users', newData);
+  }
+
   render() {
     return (
       <UserBoardWrapper>
         <Menu 
           data={this.props.data}
+          isHome={true}
+          addUser={this.addUser}
           selectedUser={this.state.idOfSelectedUser}
           updateSelectedUser={(key) => this.updateSelectedUser(key)}  
         />
+        <h1>Home</h1>
         {this.state.selectedUser.fullname}
-        <RadarRechart
-          options={{ maxValue: 20 }}
-          data={Array.isArray( this.state.selectedUser.stats)? this.state.selectedUser.stats: toArray(this.state.selectedUser.stats)}/>
         <Link to={"/edit/" + this.state.idOfSelectedUser}>
           <EditButton
             isSelectUser={this.state.idOfSelectedUser}
@@ -41,9 +56,12 @@ class UserBoard extends Component {
             Edit
           </EditButton>
         </Link>
+        <RadarRechart
+          options={{ maxValue: 20 }}
+          data={Array.isArray( this.state.selectedUser.stats)? this.state.selectedUser.stats: toArray(this.state.selectedUser.stats)}/>
       </UserBoardWrapper>
     );
   }
 }
 
-export default UserBoard
+export default UserBoard;

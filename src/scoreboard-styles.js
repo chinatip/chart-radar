@@ -23,15 +23,18 @@ export const Logo = styled.img`
 export const MenuWrapper = styled.div`
   position: relative;
   height: 100vh;
-  width: 250px;
+  width: 20px;
   padding: 1.2rem;
   display: flex;
   flex-direction: column;
   width: 220px;
   background-color: #e3e3e3;
   padding: 10px;
-  box-sizing: border-box;
-  
+  box-sizing: border-box; 
+`
+
+export const AddUserButton = styled.button`
+  display: ${props => props.isHome? "inline": "none"};
 `
 
 export const UserListWrapper = styled.div`
@@ -52,7 +55,6 @@ export const ScoreItemListWrapper = styled.div`
   flex-direction: column;
   padding: 10px;
   background-color: black;
-  height: 100%;
 `
 
 export const EditButton = styled.button`

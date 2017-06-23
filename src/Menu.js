@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { 
   MenuWrapper,
+  AddUserButton,
   Logo,
   UserListWrapper 
 } from './scoreboard-styles';
@@ -11,13 +12,58 @@ import {connect} from 'react-redux'
 import { Link } from 'react-router-dom';
 import {firebaseConnect, dataToJS} from 'react-redux-firebase'
 
+const MainMenu = ({usersFullname, isHome, addUserm, selectedUser, updateSelectedUser, addUser}) => {
+  return (
+    <MenuWrapper>
+      <Logo />
+      <Link to={"/"}>
+        <button>
+          Home
+        </button>
+      </Link>
+      <Link to={"/manage"}>
+        <button>
+          Manage Users
+        </button>
+      </Link>
+      <AddUserButton 
+        isHome={isHome}
+        onClick={addUser}>
+        Add User
+      </AddUserButton>
+      <UserListWrapper>
+        {map(usersFullname, (value, key) => {
+          return (
+            <User
+              key={key}
+              id={key}
+              data={value}
+              isMenu={true}
+              selected={key === selectedUser}
+              updateSelectedUser={updateSelectedUser}/>)
+        })}
+      </UserListWrapper>
+    </MenuWrapper>
+  )
+} 
+
+
 class Menu extends Component {
   constructor(props) {
     super();
   }
 
   render () {
-    const {firebase, usersFullname} = this.props;
+    const {usersFullname} = this.props;
+    if (this.props.isHome) return ( 
+      <MainMenu
+        usersFullname={usersFullname}
+        isHome={this.props.isHome}
+        onClick={this.props.addUser}
+        selectedUser={this.props.selectedUser}
+        updateSelectedUser={this.props.updateSelectedUser}
+      />
+    )
     return (
       <MenuWrapper>
         <Logo />
@@ -26,22 +72,11 @@ class Menu extends Component {
             Home
           </button>
         </Link>
-        <Link to={"/new"}>
+        <Link to={"/manage"}>
           <button>
-            Add User
+            Manage Users
           </button>
         </Link>
-        <UserListWrapper>
-          {map(usersFullname, (value, key) => {
-            return (
-              <User
-                key={key}
-                id={key}
-                data={value}
-                selected={key === this.props.selectedUser}
-                updateSelectedUser={this.props.updateSelectedUser}/>)
-          })}
-        </UserListWrapper>
       </MenuWrapper>
     )
   }

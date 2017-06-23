@@ -12,20 +12,44 @@ const UserWrapper = styled.div`
   cursor: pointer;
 `
 
+const UserMenu = ({id, data, selected, updateSelectedUser}) => {
+  return (
+    <UserWrapper 
+        selected={selected} 
+        onMouseOver={(key) => updateSelectedUser(id)}>
+        {data.fullname}
+      </UserWrapper>
+  )
+}
+
+const UserManage = ({id, data}) => {
+  return (
+    <div>
+      {data.fullname}
+    </div>
+  )
+}
+
 class User extends Component {
   constructor(props) {
     super();
-    // console.log("User Props ID", props.id)
   }
 
   render() {
+    if(this.props.isMenu)
+      return (
+        <UserMenu 
+          id={this.props.id}
+          data={this.props.data}
+          selected={this.props.selected} 
+          updateSelectedUser={this.props.updateSelectedUser}
+        />
+      );
     return (
-      <UserWrapper 
-        selected={this.props.selected} 
-        onMouseOver={(key) => this.props.updateSelectedUser(this.props.id)}>
-        {this.props.data.fullname}
-      </UserWrapper>
-    );
+      <UserManage 
+        id={this.props.id}
+        data={this.props.data}/>
+    )  
   }
 }
 

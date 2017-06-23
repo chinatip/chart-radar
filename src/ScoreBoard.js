@@ -37,10 +37,9 @@ const DEFAULT_USERS_DATA = [
 
 
 const ScoreBoard = ({firebase, usersData}) => {
-  console.log("usersData", usersData)
   if (!usersData) return <div>Loading</div>
   return (
-    <UserBoard data={usersData}/> 
+    <UserBoard data={usersData} firebase={firebase}/> 
   )
 }
 

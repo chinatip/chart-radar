@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom'
 import ScoreBoard from './ScoreBoard'
 import EditUser from './pages/EditUser'
-import AddUser from './pages/AddUser'
 import { GlobalStyles } from './scoreboard-styles';
-import Menu from './Menu';
+import ManageUser from './pages/ManageUser'
 
 class App extends Component {
   render() {
@@ -13,7 +12,7 @@ class App extends Component {
         <GlobalStyles/>
         <Switch>
           <Route exact path="/" component={ ScoreBoard }/>
-          <Route exact path="/new" component={ AddUser }/>
+          <Route exact path="/manage" component={ ManageUser }/>
           <Route path="/edit/:userId" component={ EditUser }/>
         </Switch>
       </div>
