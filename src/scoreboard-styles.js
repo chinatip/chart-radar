@@ -55,6 +55,16 @@ export const ScoreItemListWrapper = styled.div`
   height: 100%;
 `
 
+export const EditButton = styled.button`
+  color: white;
+  border-radius: 30%;
+  padding: 10px;
+  border-color: 10px solid #3db9df;
+  background-color: #3db9df;
+  cursor: pointer;
+  display: ${props => props.isSelectUser? "inline": "none"};
+`
+
 ///// ScoreItem
 
 export const ScoreItemWrapper = styled.div`

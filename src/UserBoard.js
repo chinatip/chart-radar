@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { UserBoardWrapper } from './scoreboard-styles';
+import { UserBoardWrapper, EditButton } from './scoreboard-styles';
 import User from './User'
 import Menu from './Menu'
 import { map, toArray } from 'lodash';
@@ -10,8 +10,8 @@ class UserBoard extends Component {
   constructor(props) {
     super();
     this.state = {
-      selectedUser: props.data[1],
-      idOfSelectedUser: 1
+      selectedUser: false,
+      idOfSelectedUser: null
     }
   }
 
@@ -27,26 +27,20 @@ class UserBoard extends Component {
       <UserBoardWrapper>
         <Menu 
           data={this.props.data}
-          selectedUser={this.state.selectedUser}
+          selectedUser={this.state.idOfSelectedUser}
           updateSelectedUser={(key) => this.updateSelectedUser(key)}  
         />
-          <RadarRechart
-            options={{ maxValue: 20 }}
-            data={Array.isArray( this.state.selectedUser.stats)? this.state.selectedUser.stats: toArray(this.state.selectedUser.stats)}/>
-          <Link to={"/edit/" + this.state.idOfSelectedUser}>
-            <button
-              style={{
-              color: "white",
-              borderRadius: "30%",
-              padding: "10px",
-              borderColor: "10px solid #3db9df",
-              backgroundColor: "#3db9df",
-              cursor: "pointer"
-              }}
-              components={{data: this.props.data}}>
-              Edit
-            </button>
-          </Link>
+        {this.state.selectedUser.fullname}
+        <RadarRechart
+          options={{ maxValue: 20 }}
+          data={Array.isArray( this.state.selectedUser.stats)? this.state.selectedUser.stats: toArray(this.state.selectedUser.stats)}/>
+        <Link to={"/edit/" + this.state.idOfSelectedUser}>
+          <EditButton
+            isSelectUser={this.state.idOfSelectedUser}
+            components={{data: this.props.data}}>
+            Edit
+          </EditButton>
+        </Link>
       </UserBoardWrapper>
     );
   }

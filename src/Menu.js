@@ -8,6 +8,7 @@ import User from './User'
 import { map } from 'lodash';
 import {compose} from 'redux'
 import {connect} from 'react-redux'
+import { Link } from 'react-router-dom';
 import {firebaseConnect, dataToJS} from 'react-redux-firebase'
 
 class Menu extends Component {
@@ -17,10 +18,19 @@ class Menu extends Component {
 
   render () {
     const {firebase, usersFullname} = this.props;
-    console.log("Menu data", usersFullname)
     return (
       <MenuWrapper>
         <Logo />
+        <Link to={"/"}>
+          <button>
+            Home
+          </button>
+        </Link>
+        <Link to={"/new"}>
+          <button>
+            Add User
+          </button>
+        </Link>
         <UserListWrapper>
           {map(usersFullname, (value, key) => {
             return (
@@ -28,7 +38,7 @@ class Menu extends Component {
                 key={key}
                 id={key}
                 data={value}
-                selected={value.fullname === this.props.selectedUser.fullname}
+                selected={key === this.props.selectedUser}
                 updateSelectedUser={this.props.updateSelectedUser}/>)
           })}
         </UserListWrapper>

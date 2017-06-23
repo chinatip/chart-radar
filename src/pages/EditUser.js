@@ -23,17 +23,21 @@ class EditUserFullname extends Component {
   }
   
   updateFullname = () => {
-    const {firebase, firebasePath} = this.props;
+    const {firebase, firebasePath, data} = this.props;
     firebase.update(firebasePath, {fullname: this.state.fullname})
   }
 
   render() {
     return (
       <div>
+        {this.props.data}
+        <br />
         <input 
           defaultValue={this.state.fullname}
           onChange={this.handleChangeText}
           onKeyPress={this.handleKeyPress}/>
+        <button onClick={this.updateFullname}>Save</button>
+
       </div>
     )
   }

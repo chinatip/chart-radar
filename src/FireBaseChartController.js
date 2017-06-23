@@ -22,6 +22,7 @@ const withChartController = (ChartComponent, chartOptions={}) => {
 }
 
 export const withFirebaseController = (ChartComponent, chartOptions) => {
+  // console.log("RadarChartFirebase Data", data)
   const ChartWithController = withChartController(ChartComponent, chartOptions)
   return class ChartWithFirebaseController extends Component {
     static defaultProps = {
