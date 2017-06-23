@@ -52,7 +52,6 @@ const EditUserPage = ({ props, firebase, userProfile, userKey }) => {
     <div style={{display: "flex"}}>
       <Menu isHome={false} />
       <div style={{display: "flex", flexDirection: "column"}}>
-        !!!! Fix -- Cannot update label !!!
         <EditUserFullname 
           data={userProfile.fullname}
           firebase={firebase}

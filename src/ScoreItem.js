@@ -12,7 +12,7 @@ class ScoreItem extends Component {
   handleKeyPress = (e) => {
     console.log(e)
     if (e.key == 'Enter') {
-        this.props.updateLabel(this.props.id, e)
+        this.props.updateLabel(this.props.id, e.target.value)
     }
   }
 
