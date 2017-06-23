@@ -59,7 +59,7 @@ class Menu extends Component {
       <MainMenu
         usersFullname={usersFullname}
         isHome={this.props.isHome}
-        onClick={this.props.addUser}
+        addUser={this.props.addUser}
         selectedUser={this.props.selectedUser}
         updateSelectedUser={this.props.updateSelectedUser}
       />
