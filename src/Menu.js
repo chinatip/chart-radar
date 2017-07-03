@@ -12,7 +12,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom';
 import { firebaseConnect, dataToJS, isLoaded } from 'react-redux-firebase'
 
-const MainMenu = ({usersFullname, groupByPosition, isHome, addUserm, selectedUser, updateSelectedUser, addUser}) => {
+const MainMenu = ({usersFullname, groupByPosition, isHome, selectedUser, updateSelectedUserHover, updateSelectedUserClick, addUser}) => {
   if(!isLoaded(groupByPosition)) return <div>Loading...</div>
   return (
     <MenuWrapper>
@@ -33,7 +33,22 @@ const MainMenu = ({usersFullname, groupByPosition, isHome, addUserm, selectedUse
         Add User
       </AddUserButton>
       <UserListWrapper>
-        
+        {/*{
+          forEach(groupByPosition, (list) => {
+            console.log("list", list)
+            forEach(list, (value) => {
+              console.log("user", value.user)
+              return (
+                <User
+                  key={value.userKey}
+                  id={value.userKey}
+                  data={value.user}
+                  isMenu={true}
+                  selected={value.userKey === selectedUser}
+                  updateSelectedUserHover={updateSelectedUserHover}/>)
+              })
+          })
+        }*/}
         {
           map(usersFullname, (value, key) => {
           return (
@@ -43,7 +58,8 @@ const MainMenu = ({usersFullname, groupByPosition, isHome, addUserm, selectedUse
               data={value}
               isMenu={true}
               selected={key === selectedUser}
-              updateSelectedUser={updateSelectedUser}/>)
+              updateSelectedUserHover={updateSelectedUserHover}
+              updateSelectedUserClick={updateSelectedUserClick}/>)
         })}
       </UserListWrapper>
     </MenuWrapper>
@@ -65,7 +81,9 @@ class Menu extends Component {
         addUser={this.props.addUser}
         groupByPosition={this.props.groupByPosition}
         selectedUser={this.props.selectedUser}
-        updateSelectedUser={this.props.updateSelectedUser}
+        isClicked={this.props.isClicked}
+        updateSelectedUserHover={this.props.updateSelectedUserHover}
+        updateSelectedUserClick={this.props.updateSelectedUserClick}
       />
     )
     return (

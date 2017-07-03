@@ -12,11 +12,12 @@ const UserWrapper = styled.div`
   cursor: pointer;
 `
 
-const UserMenu = ({id, data, selected, updateSelectedUser}) => {
+const UserMenu = ({id, data, selected, updateSelectedUserHover, updateSelectedUserClick}) => {
   return (
     <UserWrapper 
       selected={selected} 
-      onMouseOver={(key) => updateSelectedUser(id)}>
+      onMouseDown={(key) => updateSelectedUserClick(id)}
+      onMouseOver={(key) => updateSelectedUserHover(id)}>
       {data.fullname}
     </UserWrapper>
   )
@@ -41,8 +42,9 @@ class User extends Component {
         <UserMenu 
           id={this.props.id}
           data={this.props.data}
-          selected={this.props.selected} 
-          updateSelectedUser={this.props.updateSelectedUser}
+          selected={this.props.selected}
+          updateSelectedUserHover={this.props.updateSelectedUserHover}
+          updateSelectedUserClick={this.props.updateSelectedUserClick}
         />
       );
     return (

@@ -9,16 +9,35 @@ class UserBoard extends Component {
   constructor(props) {
     super();
     this.state = {
+      isClicked: false,
       selectedUser: props.data[0],
       idOfSelectedUser: 0
     }
   }
 
-  updateSelectedUser = (key) => {
-    this.setState({
-      selectedUser: this.props.data[key],
-      idOfSelectedUser: key
-    })
+  updateSelectedUserHover = (key) => {
+    if(!this.state.isClicked)
+      this.setState({
+        selectedUser: this.props.data[key],
+        idOfSelectedUser: key
+      })
+  }
+
+  updateSelectedUserClick = (key) => {
+    if(this.state.isClicked && key === this.state.idOfSelectedUser) {
+      this.setState({
+        isClicked: !this.state.isClicked,
+        selectedUser: this.props.data[key],
+        idOfSelectedUser: key
+      })
+    }
+    else {
+      this.setState({
+        isClicked: true,
+        selectedUser: this.props.data[key],
+        idOfSelectedUser: key
+      })
+    }
   }
 
   addUser = () => {
@@ -46,7 +65,8 @@ class UserBoard extends Component {
           addUser={this.addUser}
           groupByPosition={this.props.groupByPosition}
           selectedUser={this.state.idOfSelectedUser}
-          updateSelectedUser={(key) => this.updateSelectedUser(key)}  
+          updateSelectedUserHover={(key) => this.updateSelectedUserHover(key)}
+          updateSelectedUserClick={(key) => this.updateSelectedUserClick(key)}  
         />
         <h1>Home</h1>
         {this.state.selectedUser.fullname}
