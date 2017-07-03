@@ -3,11 +3,11 @@ import styled, { css, injectGlobal } from 'styled-components'
 //// global
 
 export const GlobalStyles = ({ theme }) => {
-    injectGlobal`
-        body {
-          margin: 0;
-        }
-    `
+  injectGlobal`
+    body {
+      margin: 0;
+    }
+  `
 
     return null
 }

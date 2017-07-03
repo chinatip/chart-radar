@@ -2,6 +2,7 @@
   "users": {
     "0": {
       "fullname": "Ranatchai Ch.",
+      "position": "Developer",
       "stats": {
         "0": { "label": "Math", "value": 10 },
         "1": { "label": "Chinese", "value": 8 },
@@ -13,6 +14,7 @@
     },
     "1": {
       "fullname": "Namtan Chinatip",
+      "position": "????",
       "stats": {
         "0": { "label": "Math", "value": 7 },
         "1": { "label": "Chinese", "value": 9 },
@@ -24,6 +26,7 @@
     },
     "_xxx_": {
       "fullname": "Ranatchai Ch.",
+      "position": "Developer",
       "stats": {
         "0": { "label": "Math", "value": 10 },
         "1": { "label": "Chinese", "value": 8 },

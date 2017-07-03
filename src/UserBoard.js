@@ -9,8 +9,8 @@ class UserBoard extends Component {
   constructor(props) {
     super();
     this.state = {
-      selectedUser: false,
-      idOfSelectedUser: null
+      selectedUser: props.data[0],
+      idOfSelectedUser: 0
     }
   }
 
@@ -44,6 +44,7 @@ class UserBoard extends Component {
           data={this.props.data}
           isHome={true}
           addUser={this.addUser}
+          groupByPosition={this.props.groupByPosition}
           selectedUser={this.state.idOfSelectedUser}
           updateSelectedUser={(key) => this.updateSelectedUser(key)}  
         />

@@ -1,11 +1,12 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import Menu from '../Menu'
-import {compose} from 'redux'
-import {connect} from 'react-redux'
-import {firebaseConnect, dataToJS} from 'react-redux-firebase'
+import { compose } from 'redux'
+import { connect } from 'react-redux'
+import { firebaseConnect, dataToJS } from 'react-redux-firebase'
 import User from '../User'
 import { map } from 'lodash';
 import styled from 'styled-components'
+import { Link } from 'react-router-dom';
 
 const UserWrapper = styled.div`
   width: 200px;
@@ -25,19 +26,27 @@ const ManageUserWrapper = styled.div`
   display: flex;
 `
 
-const UserItem = ({key, value, fullname, deleteUser}) => {
+const UserItem = ({id, value, fullname, deleteUser}) => {
+  console.log("key", id)
   return (
     <UserItemWrapper>
       <UserWrapper>
         <User
           isMenu={false}
-          key={key}
-          id={key}
+          key={id}
+          id={id}
           data={value}
           selected={false}
           updateSelectedUser={null}/>
       </UserWrapper>
-      <button onClick={() => deleteUser(key)}>Delete</button>
+      <Link to={"/edit/" + id}>
+        <button 
+          isSelectUser={id}
+          components={value.stats}
+        >
+          Edit</button>
+      </Link>
+      <button onClick={() => deleteUser(id)}>Delete</button>
     </UserItemWrapper>
   )
 }
@@ -61,9 +70,11 @@ class ManageUser extends Component {
         <ManageUserWrapper>
           <div>
             {map(usersData, (value, key) => {
+              console.log("value" , key)
               return (
                 <UserItem 
                   key={key}
+                  id={key}
                   value={value}
                   fullname={value.fullname}
                   deleteUser={(e) => this.deleteUser(key)}

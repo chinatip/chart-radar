@@ -67,6 +67,13 @@ exports.updateFullname = functions.database.ref('/users/{userId}/fullname')
     const fullname = event.data.val();
     const key = event.data.ref.parent.key;
     return admin.database().ref(`/fullnames/${key}`).update({ fullname })
-  })
+})
+
+exports.updatePosition = functions.database.ref('/users/{userId}/position')
+  .onWrite(event => {
+    const position = event.data.val();
+    const key = event.data.ref.parent.key;
+    return admin.database().ref(`/fullnames/${key}`).update({ position })
+})
 // [END makeUppercase]
 // [END all]

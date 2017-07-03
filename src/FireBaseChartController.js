@@ -21,7 +21,6 @@ const withChartController = (ChartComponent, chartOptions={}) => {
 }
 
 export const withFirebaseController = (ChartComponent, chartOptions) => {
-  // console.log("RadarChartFirebase Data", data)
   const ChartWithController = withChartController(ChartComponent, chartOptions)
   return class ChartWithFirebaseController extends Component {
     static defaultProps = {
@@ -59,7 +58,7 @@ export const withFirebaseController = (ChartComponent, chartOptions) => {
     }
 
     generateLabel(nums) {
-      if (nums.length == 0) return 1;
+      if (nums.length === 0) return 1;
       return nums[nums.length - 1] + 1
     }
 

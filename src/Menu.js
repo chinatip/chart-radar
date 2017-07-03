@@ -6,13 +6,14 @@ import {
   UserListWrapper 
 } from './scoreboard-styles';
 import User from './User'
-import { map } from 'lodash';
-import {compose} from 'redux'
-import {connect} from 'react-redux'
+import { forEach, map } from 'lodash';
+import { compose } from 'redux'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom';
-import {firebaseConnect, dataToJS} from 'react-redux-firebase'
+import { firebaseConnect, dataToJS, isLoaded } from 'react-redux-firebase'
 
-const MainMenu = ({usersFullname, isHome, addUserm, selectedUser, updateSelectedUser, addUser}) => {
+const MainMenu = ({usersFullname, groupByPosition, isHome, addUserm, selectedUser, updateSelectedUser, addUser}) => {
+  if(!isLoaded(groupByPosition)) return <div>Loading...</div>
   return (
     <MenuWrapper>
       <Logo />
@@ -32,7 +33,9 @@ const MainMenu = ({usersFullname, isHome, addUserm, selectedUser, updateSelected
         Add User
       </AddUserButton>
       <UserListWrapper>
-        {map(usersFullname, (value, key) => {
+        
+        {
+          map(usersFullname, (value, key) => {
           return (
             <User
               key={key}
@@ -60,6 +63,7 @@ class Menu extends Component {
         usersFullname={usersFullname}
         isHome={this.props.isHome}
         addUser={this.props.addUser}
+        groupByPosition={this.props.groupByPosition}
         selectedUser={this.props.selectedUser}
         updateSelectedUser={this.props.updateSelectedUser}
       />
