@@ -11,6 +11,7 @@ import Welcome from './Welcome';
 import ScoreBoard from '../ScoreBoard'
 import ScoreItem from '../ScoreItem'
 import User from '../User'
+import RadarEchart from '../RadarEchart'
 
 storiesOf('Welcome', module).add('to Storybook', () => <Welcome showApp={linkTo('Button')} />);
 
@@ -57,6 +58,9 @@ storiesOf('ScoreBoard', module)
   ))
   .add('chart.js', () => (
     <RadarChartJS data={DEFAULT_CHART_DATA}/>
+  ))
+  .add('echart', () => (
+    <RadarEchart />
   ))
   .add('User', () => (
     <User data={{fullname: "Namtan Chinatip"}}

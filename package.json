@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "chart.js": "^1.1.1",
+    "echarts": "^3.6.2",
+    "echarts-for-react": "^1.4.4",
     "firebase-admin": "^5.0.0",
     "firebase-functions": "^0.5.7",
     "react": "^15.5.4",

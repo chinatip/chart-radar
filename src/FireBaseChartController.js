@@ -1,6 +1,7 @@
 import { map, toArray } from 'lodash';
 import React, { Component } from 'react';
 import { RadarRechart } from './RadarRechart';
+import RadarEchart from './RadarEchart'
 import { EditScoreMenu } from './EditScoreMenu';
 import { RadarChartControllerWrapper } from './scoreboard-styles';
  
@@ -44,7 +45,7 @@ export const withFirebaseController = (ChartComponent, chartOptions) => {
         let label = value.label
         if(label.length > 6){
           if(label.includes("label-")) {
-            let num = parseInt(label.substr(6, label.length))
+            let num = parseInt(label.substr(6, label.length), 10)
             labels.push(num)
           }
         }
@@ -76,4 +77,6 @@ export const withFirebaseController = (ChartComponent, chartOptions) => {
   }
 }
 
-export const RadarChartWithFirebaseController = withFirebaseController(RadarRechart, { maxValue: 20 })
+// export const RadarChartWithFirebaseController = withFirebaseController(RadarRechart, { maxValue: 20 })
+
+export const RadarChartWithFirebaseController = withFirebaseController(RadarEchart, { maxValue: 20 })

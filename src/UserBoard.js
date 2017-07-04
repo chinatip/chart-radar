@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { UserBoardWrapper, EditButton } from './scoreboard-styles';
 import Menu from './Menu'
 import { toArray } from 'lodash';
-import { RadarRechart } from './RadarRechart';
+import RadarEchart from './RadarEchart';
 import { Link } from 'react-router-dom';
 
 class UserBoard extends Component {
@@ -77,7 +77,7 @@ class UserBoard extends Component {
             Edit
           </EditButton>
         </Link>
-        <RadarRechart
+        <RadarEchart
           options={{ maxValue: 20 }}
           data={Array.isArray( this.state.selectedUser.stats)? this.state.selectedUser.stats: toArray(this.state.selectedUser.stats)}/>
       </UserBoardWrapper>

@@ -12,8 +12,12 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom';
 import { firebaseConnect, dataToJS, isLoaded } from 'react-redux-firebase'
 
-const MainMenu = ({usersFullname, groupByPosition, isHome, selectedUser, updateSelectedUserHover, updateSelectedUserClick, addUser}) => {
-  if(!isLoaded(groupByPosition)) return <div>Loading...</div>
+
+const MainMenu = ({ usersFullname, groupByPosition, isHome, selectedUser, updateSelectedUserHover, updateSelectedUserClick, addUser }) => {
+  
+  if (!isLoaded(groupByPosition)) {
+    return <div>Loading...</div>
+  }
   return (
     <MenuWrapper>
       <Logo />
@@ -29,7 +33,8 @@ const MainMenu = ({usersFullname, groupByPosition, isHome, selectedUser, updateS
       </Link>
       <AddUserButton 
         isHome={isHome}
-        onClick={addUser}>
+        onClick={addUser}
+      >
         Add User
       </AddUserButton>
       <UserListWrapper>
@@ -51,16 +56,19 @@ const MainMenu = ({usersFullname, groupByPosition, isHome, selectedUser, updateS
         }*/}
         {
           map(usersFullname, (value, key) => {
-          return (
-            <User
-              key={key}
-              id={key}
-              data={value}
-              isMenu={true}
-              selected={key === selectedUser}
-              updateSelectedUserHover={updateSelectedUserHover}
-              updateSelectedUserClick={updateSelectedUserClick}/>)
-        })}
+            return (
+              <User
+                key = {key}
+                id = {key}
+                data={value}
+                isMenu={true}
+                selected={key === selectedUser}
+                updateSelectedUserHover={updateSelectedUserHover}
+                updateSelectedUserClick={updateSelectedUserClick}
+              />
+            )
+          })
+        }
       </UserListWrapper>
     </MenuWrapper>
   )
@@ -68,24 +76,21 @@ const MainMenu = ({usersFullname, groupByPosition, isHome, selectedUser, updateS
 
 
 class Menu extends Component {
-  constructor(props) {
-    super();
-  }
-
   render () {
     const {usersFullname} = this.props;
-    if (this.props.isHome) return ( 
-      <MainMenu
-        usersFullname={usersFullname}
-        isHome={this.props.isHome}
-        addUser={this.props.addUser}
-        groupByPosition={this.props.groupByPosition}
-        selectedUser={this.props.selectedUser}
-        isClicked={this.props.isClicked}
-        updateSelectedUserHover={this.props.updateSelectedUserHover}
-        updateSelectedUserClick={this.props.updateSelectedUserClick}
-      />
-    )
+    if (this.props.isHome) {
+      return ( 
+        <MainMenu
+          usersFullname={usersFullname}
+          isHome={this.props.isHome}
+          addUser={this.props.addUser}
+          groupByPosition={this.props.groupByPosition}
+          selectedUser={this.props.selectedUser}
+          updateSelectedUserHover={this.props.updateSelectedUserHover}
+          updateSelectedUserClick={this.props.updateSelectedUserClick}
+        />
+      )
+    }
     return (
       <MenuWrapper>
         <Logo />
@@ -104,9 +109,15 @@ class Menu extends Component {
   }
 }
 
-export default compose(firebaseConnect(['/fullnames']), connect(
-  ({ firebase }, props) => {
-    console.log('firebase', firebase)
-    const usersFullname = dataToJS(firebase, '/fullnames');
-    return { usersFullname }
-  }))(Menu)
+const enhancer = compose(
+  firebaseConnect(['/fullnames']), 
+  connect(
+    ({ firebase }, props) => {
+      console.log('firebase', firebase)
+      const usersFullname = dataToJS(firebase, '/fullnames');
+      return { usersFullname }
+    }
+  )
+)
+
+export default enhancer(Menu)
