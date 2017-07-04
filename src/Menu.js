@@ -51,8 +51,11 @@ const MainMenu = ({ usersFullname, groupByPosition, isHome, selectedUser, update
                       data={value.user}
                       isMenu={true}
                       selected={value.userKey === selectedUser}
-                      updateSelectedUserHover={updateSelectedUserHover}/>)
-                  }) 
+                      updateSelectedUserHover={updateSelectedUserHover}
+                      updateSelectedUserClick={updateSelectedUserClick}
+                    />
+                  )
+                }) 
               }</div>
             )
           })

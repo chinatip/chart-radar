@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { UserBoardWrapper, EditButton } from './scoreboard-styles';
 import Menu from './Menu'
-import { toArray, toObject, map } from 'lodash';
+import { toArray } from 'lodash';
 import RadarEchart from './RadarEchart';
 import { Link } from 'react-router-dom';
 
