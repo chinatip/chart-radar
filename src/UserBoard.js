@@ -1,21 +1,29 @@
 import React, {Component} from 'react';
 import { UserBoardWrapper, EditButton } from './scoreboard-styles';
 import Menu from './Menu'
-import { toArray } from 'lodash';
+import { toArray, toObject, map } from 'lodash';
 import RadarEchart from './RadarEchart';
 import { Link } from 'react-router-dom';
 
 class UserBoard extends Component {
   constructor(props) {
     super();
+
+    // const data = map(props.data, (value, key) => ({
+    //   ...value,
+    //   key,
+    // }))
+
+    const firstElement = Object.keys(props.data)[0];
     this.state = {
       isClicked: false,
-      selectedUser: props.data[0],
-      idOfSelectedUser: 0
+      selectedUser: props.data[firstElement],
+      idOfSelectedUser: firstElement
     }
   }
 
   updateSelectedUserHover = (key) => {
+    console.log("hover key", this.state.selectedUser)
     if(!this.state.isClicked)
       this.setState({
         selectedUser: this.props.data[key],

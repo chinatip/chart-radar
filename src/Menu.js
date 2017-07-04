@@ -14,7 +14,6 @@ import { firebaseConnect, dataToJS, isLoaded } from 'react-redux-firebase'
 
 
 const MainMenu = ({ usersFullname, groupByPosition, isHome, selectedUser, updateSelectedUserHover, updateSelectedUserClick, addUser }) => {
-  console.log("groupbyposition" , groupByPosition)
   if (!isLoaded(groupByPosition)) {
     return <div>Loading...</div>
   }
@@ -40,7 +39,6 @@ const MainMenu = ({ usersFullname, groupByPosition, isHome, selectedUser, update
       <UserListWrapper>
         {
           map(groupByPosition, (list, key) => {
-            console.log("key", key)
             return (
               <div> 
                 <span style={{fontWeight: "bold"}}>{ key }</span>
