@@ -14,7 +14,7 @@ import { firebaseConnect, dataToJS, isLoaded } from 'react-redux-firebase'
 
 
 const MainMenu = ({ usersFullname, groupByPosition, isHome, selectedUser, updateSelectedUserHover, updateSelectedUserClick, addUser }) => {
-  
+  console.log("groupbyposition" , groupByPosition)
   if (!isLoaded(groupByPosition)) {
     return <div>Loading...</div>
   }
@@ -38,23 +38,28 @@ const MainMenu = ({ usersFullname, groupByPosition, isHome, selectedUser, update
         Add User
       </AddUserButton>
       <UserListWrapper>
-        {/*{
-          forEach(groupByPosition, (list) => {
-            console.log("list", list)
-            forEach(list, (value) => {
-              console.log("user", value.user)
-              return (
-                <User
-                  key={value.userKey}
-                  id={value.userKey}
-                  data={value.user}
-                  isMenu={true}
-                  selected={value.userKey === selectedUser}
-                  updateSelectedUserHover={updateSelectedUserHover}/>)
-              })
-          })
-        }*/}
         {
+          map(groupByPosition, (list, key) => {
+            console.log("key", key)
+            return (
+              <div> 
+                <span style={{fontWeight: "bold"}}>{ key }</span>
+              {
+                map(list, (value) => {
+                  return (
+                    <User
+                      key={value.userKey}
+                      id={value.userKey}
+                      data={value.user}
+                      isMenu={true}
+                      selected={value.userKey === selectedUser}
+                      updateSelectedUserHover={updateSelectedUserHover}/>)
+                  }) 
+              }</div>
+            )
+          })
+        }
+        {/*{
           map(usersFullname, (value, key) => {
             return (
               <User
@@ -68,7 +73,7 @@ const MainMenu = ({ usersFullname, groupByPosition, isHome, selectedUser, update
               />
             )
           })
-        }
+        }*/}
       </UserListWrapper>
     </MenuWrapper>
   )

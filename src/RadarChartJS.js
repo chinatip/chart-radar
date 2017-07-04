@@ -1,13 +1,15 @@
 import React from 'react';
 import * as ChartJS from "react-chartjs";
 import { RadarChartWrapper } from './scoreboard-styles';
+import { radarChart as radarChartPropTypes } from './propTypes'
 
 export const RadarChartJS = (props) => {
-  let labels = [];
-  let data = [];
-  (props.data).forEach(function (item) {
-    labels.push(item.label)
-    data.push(item.value)
+  
+  const data = props.data.map(item => {
+    return item.value
+  })
+  const labels = props.data.map(item => {
+    return item.label
   })
 
   let chartData = {
@@ -35,9 +37,11 @@ export const RadarChartJS = (props) => {
         redraw
         data={chartData}
         options={chartOptions}
-        width={600}
-        height={250}
+        width={props.width || 600}
+        height={props.height || 250}
       />
     </RadarChartWrapper>
   )
 }
+
+RadarChartJS.propTypes = radarChartPropTypes

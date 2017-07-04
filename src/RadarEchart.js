@@ -1,21 +1,35 @@
-import React, {Component} from 'react';
+import React, {Component,PropTypes} from 'react';
 import ReactEcharts from 'echarts-for-react';
 import echarts from 'echarts';
+import { radarChart as radarChartPropTypes } from './propTypes'
 
-let labels = [];
-let data = [];
-var option2 = {}
+// let labels = [];
+// let data = [];
+// var option2 = {}
 class RadarEchart extends Component {
   constructor(){
     super();
   }
 
-  componentWillMount() {
-    (this.props.data).forEach(function (item) {
-      labels.push({name: item.label, max: 20})
-      data.push(item.value)
+  componentDidMount() {
+    this._chart = echarts.init(this._ref);
+    this.createGraph();
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.data !== prevProps.data) {
+      this.createGraph();
+    }
+  }
+
+  createGraph() {
+    const data = this.props.data.map(item => {
+      return item.value
     })
-    option2 = {
+    const labels = this.props.data.map(item => {
+      return {name: item.label, max: this.props.options.maxValue}
+    })
+
+    const option2 = {
       tooltip: {},
       radar: {
         // shape: 'circle',
@@ -23,35 +37,42 @@ class RadarEchart extends Component {
       },
       series: [
         {
-          name: '预算 vs 开销（Budget vs spending）',
+          name: this.props.chatName,
           type: 'radar',
           data: [
             {
               value: data,
-              name: '预算分配（Allocated Budget）'
+              name: this.props.dataName
             }
           ]
         }
       ]
-    };
-    console.log("option2", option2)
-  }
-  componentDidMount() {
-    var myChart = echarts.init(this._ref);
-    myChart.setOption(option2);
+    };    
+    this._chart.setOption(option2);
   }
   render() {
     return (
       <div 
         ref={ref => { this._ref = ref }}
         style={{
-          width: "600px",
-          height: "600px"
+          width: this.props.width,
+          height: this.props.height,
         }}
       >
       </div>
     )
   }
 }
+// RadarEchart.propTypes = {
+//   name: PropTypes.string
+// };
+RadarEchart.defaultProps = {
+  width: 600,
+  height: 600,
+  options: {
+    maxValue: 20
+  }  
+}
+RadarEchart.propTypes = radarChartPropTypes
 
 export default RadarEchart;

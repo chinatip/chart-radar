@@ -4,7 +4,6 @@ import { RadarRechart } from './RadarRechart';
 import RadarEchart from './RadarEchart'
 import { EditScoreMenu } from './EditScoreMenu';
 import { RadarChartControllerWrapper } from './scoreboard-styles';
- 
 const withChartController = (ChartComponent, chartOptions={}) => {
   const ChartWithController = ({ data, updateLabel, updateValue, addItem, deleteItem }) => (
     <RadarChartControllerWrapper>
