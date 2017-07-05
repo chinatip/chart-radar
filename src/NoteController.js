@@ -7,6 +7,15 @@ class NoteController extends Component {
     super();
   }
 
+  addNote = () => {
+    const { firebase } = this.props;
+    const newNote = {
+      "title": "Title",
+      "text" : "Text"
+    }
+    firebase.push(this.props.firebasePath, newNote);
+  }
+
   render() {
     return (
       <div>
@@ -24,6 +33,7 @@ class NoteController extends Component {
             )
           }) 
         }
+        <button onClick={this.addNote}>Add new note</button>
       </div>
     )
   }
