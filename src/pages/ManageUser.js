@@ -72,6 +72,7 @@ class ManageUser extends Component {
             {map(usersData, (value, key) => {
               console.log("value" , key)
               return (
+                <div>
                 <UserItem 
                   key={key}
                   id={key}
@@ -79,6 +80,7 @@ class ManageUser extends Component {
                   fullname={value.fullname}
                   deleteUser={(e) => this.deleteUser(key)}
                 />
+                </div>
               )
             })}
           </div>

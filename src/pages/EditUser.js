@@ -6,19 +6,20 @@ import { RadarChartWithFirebaseController } from '../FireBaseChartController';
 import Menu from '../Menu'
 import NoteController from '../NoteController'
 
-class EditUserFullname extends Component {
+class EditPersonalInfo extends Component {
   constructor(props) {
     super();
     this.state = {
-      fullname: props.data
+      fullname: props.data.fullname,
+      position: props.data.position
     }
   }
 
-  handleChangeText = (event) => {
+  handleChangeName = (event) => {
     this.setState({fullname: event.target.value});
   }
 
-  handleKeyPress = (event) => {
+  handleKeyPressName = (event) => {
     if (event.key === 'Enter') {
       this.updateFullname();
     }
@@ -29,17 +30,38 @@ class EditUserFullname extends Component {
     firebase.update(firebasePath, {fullname: this.state.fullname})
   }
 
+  handleChangePosition = (event) => {
+    this.setState({position: event.target.value});
+  }
+  
+  updatePosition = () => {
+    const {firebase, firebasePath} = this.props;
+    firebase.update(firebasePath, {position: this.state.position})
+  }
+
+
   render() {
     return (
       <div>
         <h1>Edit User</h1>
-        {this.props.data}
+        Name: {this.props.data.fullname}
         <br />
         <input 
           defaultValue={this.state.fullname}
-          onChange={this.handleChangeText}
-          onKeyPress={this.handleKeyPress}/>
+          onChange={this.handleChangeName}
+          onKeyPress={this.handleKeyPressName}/>
         <button onClick={this.updateFullname}>Save</button>
+        <br /><br />
+        Position: {this.props.data.position}
+        <br />
+        <select name="position" id="position" onChange={this.handleChangePosition}>
+          <option value="Undefined" disabled selected hidden>Position</option>
+          <option value="Developer">Developer</option>
+          <option value="Designer">Designer</option>
+          <option value="Undefined">Undefined</option>
+        </select>
+        <button onClick={this.updatePosition}>Save</button>
+        
 
       </div>
     )
@@ -68,8 +90,8 @@ const EditUserPage = ({ props, firebase, userProfile, userKey }) => {
     <div style={{display: "flex"}}>
       <Menu isHome={false} />
       <div style={{display: "flex", flexDirection: "column"}}>
-        <EditUserFullname 
-          data={userProfile.fullname}
+        <EditPersonalInfo
+          data={userProfile}
           firebase={firebase}
           firebasePath={"/users/" + userKey}
         />
@@ -102,5 +124,3 @@ export default compose(
     }
   })
 )(EditUserPage)
-
-// export default UserEditPage

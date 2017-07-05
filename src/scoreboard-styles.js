@@ -22,7 +22,6 @@ export const Logo = styled.img`
 
 export const MenuWrapper = styled.div`
   position: relative;
-  height: 100vh;
   width: 20px;
   padding: 1.2rem;
   display: flex;
