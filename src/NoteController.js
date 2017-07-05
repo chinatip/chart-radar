@@ -16,9 +16,19 @@ class NoteController extends Component {
     firebase.push(this.props.firebasePath, newNote);
   }
 
+  deleteNote = (key) => {
+    const { firebase, firebasePath } = this.props;
+    firebase.remove(firebasePath + key);
+  }
+
+  updateNote = (key, value) => {
+    const { firebase, firebasePath } = this.props;
+    firebase.update( firebasePath + key, value)
+  }
+
   render() {
     return (
-      <div>
+      <div style={{display: "flex", flexDirection: "row"}}>
         {
           map(this.props.data, (value, key) => {
             return (
@@ -26,9 +36,9 @@ class NoteController extends Component {
                 key={ key }
                 id={ key }
                 data={ value }
-                firebase={ this.props.firebase }
-                firebasePath={ this.props.firebasePath }
                 editable={ true }
+                updateNote={ this.updateNote }
+                deleteNote={(key) => this.deleteNote(key)}
               />
             )
           }) 

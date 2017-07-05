@@ -35,9 +35,8 @@ class Note extends Component {
   }
 
   updateTitle = () => {
-    const { firebase, firebasePath, id } = this.props;
     this._isTyping = false;
-    firebase.update( firebasePath + id, {title: this.state.title})
+    this.props.updateNote(this.props.id, {title: this.state.title});
   }
 
   handleChangeText = (event) => {
@@ -52,11 +51,10 @@ class Note extends Component {
   }
 
   updateText = () => {
-    const { firebase, firebasePath, id } = this.props;
     this._isTyping = false;
-    firebase.update(firebasePath + id, {text: this.state.text})
+    this.props.updateNote(this.props.id, {text: this.state.text});
   }
-  
+
   render() {
     return (
       <NoteWrapper editable={this.props.editable}>
@@ -74,6 +72,12 @@ class Note extends Component {
           onKeyPress={this.handleKeyPressText}
         >
         </EditInputText>
+        <DeleteButton 
+          editable={this.props.editable}
+          onClick={() => this.props.deleteNote(this.props.id)}
+        >
+        X
+        </DeleteButton>
       </NoteWrapper>
     )
   }
@@ -93,10 +97,17 @@ export const EditInputText = styled.input`
   text-align: left;
 `
 
+const DeleteButton = styled.button`
+  display: ${props => props.editable? "block": "none"};
+`
+
 export const NoteWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
   border: 2px solid black; 
   width: 100px; 
   height: 100px; 
   padding: 1rem;
+  overflow: hidden;
   pointer-events: ${props => props.editable? "auto": "none"};
 `
