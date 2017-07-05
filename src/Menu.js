@@ -6,7 +6,7 @@ import {
   UserListWrapper 
 } from './scoreboard-styles';
 import User from './User'
-import { forEach, map } from 'lodash';
+import { map } from 'lodash';
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom';

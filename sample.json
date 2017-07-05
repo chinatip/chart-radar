@@ -10,6 +10,12 @@
         "3": { "label": "Geography", "value": 3 },
         "4": { "label": "Physics", "value": 7 },
         "5": { "label": "History", "value": 7 }
+      },
+      "notes":{
+        "0":{
+          "title": "title0",
+          "text": "text0"
+        }
       }
     },
     "1": {
@@ -22,6 +28,12 @@
         "3": { "label": "Geography", "value": 6 },
         "4": { "label": "Physics", "value": 5 },
         "5": { "label": "History", "value": 3 }
+      },
+      "notes":{
+        "0":{
+          "title": "title0",
+          "text": "text0"
+        }
       }
     },
     "_xxx_": {
@@ -34,6 +46,12 @@
         "3": { "label": "Geography", "value": 3 },
         "4": { "label": "Physics", "value": 7 },
         "5": { "label": "History", "value": 7 }
+      },
+      "notes":{
+        "0":{
+          "title": "title0",
+          "text": "text0"
+        }
       }
     }
   }

@@ -1,15 +1,8 @@
-import React, {Component,PropTypes} from 'react';
-import ReactEcharts from 'echarts-for-react';
+import React, { Component } from 'react';
 import echarts from 'echarts';
 import { radarChart as radarChartPropTypes } from './propTypes'
 
-// let labels = [];
-// let data = [];
-// var option2 = {}
 class RadarEchart extends Component {
-  constructor(){
-    super();
-  }
 
   componentDidMount() {
     this._chart = echarts.init(this._ref);
@@ -63,9 +56,7 @@ class RadarEchart extends Component {
     )
   }
 }
-// RadarEchart.propTypes = {
-//   name: PropTypes.string
-// };
+
 RadarEchart.defaultProps = {
   width: 600,
   height: 600,

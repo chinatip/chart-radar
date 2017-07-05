@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { firebaseConnect, dataToJS, isLoaded, isEmpty } from 'react-redux-firebase';
 import { RadarChartWithFirebaseController } from '../FireBaseChartController';
 import Menu from '../Menu'
+import NoteController from '../NoteController'
 
 class EditUserFullname extends Component {
   constructor(props) {
@@ -45,6 +46,21 @@ class EditUserFullname extends Component {
   }
 }
 
+const noteData = {
+  "0":{
+    title: "t0",
+    text: "detail0"
+  },
+  "1":{
+    title: "t1",
+    text: "detail1"
+  },
+  "2":{
+    title: "t2",
+    text: "detail2"
+  }
+}
+
 const EditUserPage = ({ props, firebase, userProfile, userKey }) => {
   if (!isLoaded(userProfile)) return <div>Loading</div>
   if (isEmpty(userProfile)) return <div>User not found</div>
@@ -58,9 +74,14 @@ const EditUserPage = ({ props, firebase, userProfile, userKey }) => {
           firebasePath={"/users/" + userKey}
         />
         <RadarChartWithFirebaseController
-          firebase={firebase}
           data={userProfile.stats}
-          firebasePath={"/users/" + userKey + "/stats"}
+          firebase={firebase}
+          firebasePath={"/users/" + userKey + "/stats/"}
+        />
+        <NoteController 
+          data={ userProfile.notes } 
+          firebase={ firebase }
+          firebasePath={"/users/" + userKey + "/notes/"}
         />
       </div>
     </div>
@@ -74,7 +95,6 @@ export default compose(
   connect((state, props) => {
     const userKey = props.match.params.userId
     const usersData = dataToJS(state.firebase, '/users');
-    console.log("usersData", usersData);
     const userProfile = dataToJS(state.firebase, '/users/' + userKey);
     return {
       userKey,

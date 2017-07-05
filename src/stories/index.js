@@ -12,6 +12,7 @@ import ScoreBoard from '../ScoreBoard'
 import ScoreItem from '../ScoreItem'
 import User from '../User'
 import RadarEchart from '../RadarEchart'
+import Note from '../Note'
 
 storiesOf('Welcome', module).add('to Storybook', () => <Welcome showApp={linkTo('Button')} />);
 
@@ -61,6 +62,9 @@ storiesOf('ScoreBoard', module)
   ))
   .add('echart', () => (
     <RadarEchart />
+  ))
+  .add('note', () => (
+    <Note />
   ))
   .add('User', () => (
     <User data={{fullname: "Namtan Chinatip"}}

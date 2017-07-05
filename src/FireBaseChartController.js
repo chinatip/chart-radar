@@ -1,6 +1,5 @@
 import { map, toArray } from 'lodash';
 import React, { Component } from 'react';
-import { RadarRechart } from './RadarRechart';
 import RadarEchart from './RadarEchart'
 import { EditScoreMenu } from './EditScoreMenu';
 import { RadarChartControllerWrapper } from './scoreboard-styles';
@@ -28,13 +27,13 @@ export const withFirebaseController = (ChartComponent, chartOptions) => {
     };
     onUpdateValue = (key, value) => {
       const prevStats = this.props.data[key]
-      const updatePath = this.props.firebasePath +  '/' + key
+      const updatePath = this.props.firebasePath + key
       this.props.firebase.update(updatePath, { ...prevStats, value: Number(value) })
     }
 
     onUpdateLabel = (key, value) => {
       const prevStats = this.props.data[key]
-      const updatePath = this.props.firebasePath +  '/' + key
+      const updatePath = this.props.firebasePath + key
       this.props.firebase.update(updatePath, { ...prevStats, label: value })
     }
 
@@ -54,7 +53,7 @@ export const withFirebaseController = (ChartComponent, chartOptions) => {
     }
 
     onDeleteItem = (key) => {
-      this.props.firebase.remove(this.props.firebasePath +  '/' + key)
+      this.props.firebase.remove(this.props.firebasePath + key)
     }
 
     generateLabel(nums) {

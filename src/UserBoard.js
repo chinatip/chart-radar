@@ -1,19 +1,14 @@
 import React, {Component} from 'react';
 import { UserBoardWrapper, EditButton } from './scoreboard-styles';
 import Menu from './Menu'
-import { toArray } from 'lodash';
+import { map, toArray } from 'lodash';
 import RadarEchart from './RadarEchart';
 import { Link } from 'react-router-dom';
+import Note from './Note'
 
 class UserBoard extends Component {
   constructor(props) {
     super();
-
-    // const data = map(props.data, (value, key) => ({
-    //   ...value,
-    //   key,
-    // }))
-
     const firstElement = Object.keys(props.data)[0];
     this.state = {
       isClicked: false,
@@ -88,6 +83,20 @@ class UserBoard extends Component {
         <RadarEchart
           options={{ maxValue: 20 }}
           data={Array.isArray( this.state.selectedUser.stats)? this.state.selectedUser.stats: toArray(this.state.selectedUser.stats)}/>
+        {
+          map(this.state.selectedUser.notes , (value, key) => {
+            return (
+              <Note 
+                key={ key }
+                id={ key }
+                data={ value }
+                firebase={ null }
+                firebasePath={ null }
+                editable={ false }
+              />
+            )
+          })
+        }
       </UserBoardWrapper>
     );
   }
