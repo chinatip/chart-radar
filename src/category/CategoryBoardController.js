@@ -8,7 +8,7 @@ import { isLoaded } from 'react-redux-firebase';
 class CategoryBoardController extends Component {
   constructor(props) {
     super();
-    const categoryData = (props.category == 'all')? props.data : groupBy(props.data, g => g.position)[props.category];
+    const categoryData = (props.category == 'all')? props.data : groupBy(props.data, g => g.position.toLowerCase())[props.category];
     const firstElement = Object.keys(categoryData)[0];
     this.state = {
       category: props.category,

@@ -11,7 +11,7 @@ const Category = ({ usersData, category }) => {
   }
   return (
     <div style={{display: "flex"}}>
-      <NewMenu />
+      <NewMenu data={usersData}/>
       <div>
         { category }
         <CategoryBoardController data={usersData} category={category}/>

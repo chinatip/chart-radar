@@ -63,13 +63,13 @@ class UserBoard extends Component {
         }
       }
     }
-    firebase.push('/users', newData);
+    const id = firebase.push('/users', newData);
   }
 
   render() {
     return (
       <UserBoardWrapper>
-        <NewMenu />
+        <NewMenu data={this.props.data} />
         <Menu 
           data={this.props.data}
           isHome={true}
