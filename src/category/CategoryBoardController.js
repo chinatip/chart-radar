@@ -3,14 +3,13 @@ import CategoryList from './CategoryList'
 import Note from '../Note'
 import RadarEchart from '../RadarEchart'
 import { map, toArray, groupBy } from 'lodash'
+import { isLoaded } from 'react-redux-firebase';
 
 class CategoryBoardController extends Component {
   constructor(props) {
     super();
     const categoryData = (props.category == 'all')? props.data : groupBy(props.data, g => g.position)[props.category];
     const firstElement = Object.keys(categoryData)[0];
-    console.log(props.category == 'all')
-    console.log("category data", categoryData);
     this.state = {
       category: props.category,
       data: categoryData,
@@ -28,12 +27,12 @@ class CategoryBoardController extends Component {
   updatePropData() {
     const categoryData = (this.props.category == 'all')? this.props.data : groupBy(this.props.data, g => g.position)[this.props.category];
       const firstElement = Object.keys(categoryData)[0];
-      this.state = {
+      this.setState({
         category: this.props.category,
         data: categoryData,
         selectedData: categoryData[firstElement],
         idOfSelectedData: firstElement
-      }
+      });
   }
 
   updateSelectedData = (key) => {
