@@ -17,6 +17,7 @@ const MainMenu = ({ usersFullname, groupByPosition, isHome, selectedUser, update
   if (!isLoaded(groupByPosition)) {
     return <div>Loading...</div>
   }
+  console.log("printing")
   return (
     <MenuWrapper>
       <Logo />
@@ -28,6 +29,11 @@ const MainMenu = ({ usersFullname, groupByPosition, isHome, selectedUser, update
       <Link to={"/manage"}>
         <button>
           Manage Users
+        </button>
+      </Link>
+      <Link to={"/all"}>
+        <button>
+          All
         </button>
       </Link>
       <AddUserButton 

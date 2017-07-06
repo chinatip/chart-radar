@@ -55,10 +55,10 @@ class EditPersonalInfo extends Component {
         Position: {this.props.data.position}
         <br />
         <select name="position" id="position" onChange={this.handleChangePosition}>
-          <option value="Undefined" disabled selected hidden>Position</option>
-          <option value="Developer">Developer</option>
-          <option value="Designer">Designer</option>
-          <option value="Undefined">Undefined</option>
+          <option value="undefined" disabled selected hidden>Position</option>
+          <option value="developer">Developer</option>
+          <option value="designer">Designer</option>
+          <option value="undefined">Undefined</option>
         </select>
         <button onClick={this.updatePosition}>Save</button>
         

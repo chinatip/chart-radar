@@ -4,6 +4,7 @@ import ScoreBoard from './ScoreBoard'
 import EditUser from './pages/EditUser'
 import { GlobalStyles } from './scoreboard-styles';
 import ManageUser from './pages/ManageUser'
+import Category from './pages/Category'
 
 class App extends Component {
   render() {
@@ -13,7 +14,8 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={ ScoreBoard }/>
           <Route exact path="/manage" component={ ManageUser }/>
-          <Route path="/edit/:userId" component={ EditUser }/>
+          <Route exact path="/category/:category" component={ Category }/>
+          <Route path="/edit/:userId" component={ EditUser } />
         </Switch>
       </div>
     );

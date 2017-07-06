@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { UserBoardWrapper, EditButton } from './scoreboard-styles';
 import Menu from './Menu'
+import NewMenu from './NewMenu'
 import { map, toArray } from 'lodash';
 import RadarEchart from './RadarEchart';
 import { Link } from 'react-router-dom';
@@ -77,6 +78,7 @@ class UserBoard extends Component {
           updateSelectedUserHover={(key) => this.updateSelectedUserHover(key)}
           updateSelectedUserClick={(key) => this.updateSelectedUserClick(key)}  
         />
+        <NewMenu />
         <h1>Home</h1>
         {this.state.selectedUser.fullname}
         <Link to={"/edit/" + this.state.idOfSelectedUser}>
@@ -90,7 +92,7 @@ class UserBoard extends Component {
           options={{ maxValue: 20 }}
           data={Array.isArray( this.state.selectedUser.stats)? this.state.selectedUser.stats: toArray(this.state.selectedUser.stats)}/>
         {
-          map(this.state.selectedUser.notes , (value, key) => {
+          map(this.state.selectedUser.notes, (value, key) => {
             return (
               <Note 
                 key={ key }
