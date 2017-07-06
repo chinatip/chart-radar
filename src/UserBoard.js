@@ -71,7 +71,13 @@ class UserBoard extends Component {
     return (
       <UserBoardWrapper>
         <NewMenu data={this.props.data} firebase={this.props.firebase}/>
-        <Menu 
+        <div>
+          <h1>Home</h1>
+          <br/>
+          ----------
+          <h2>Welcome!</h2>
+        </div>
+        {/*<Menu 
           data={this.props.data}
           isHome={true}
           addUser={this.addUser}
@@ -105,7 +111,7 @@ class UserBoard extends Component {
               />
             )
           })
-        }
+        }*/}
       </UserBoardWrapper>
     );
   }

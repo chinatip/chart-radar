@@ -62,6 +62,7 @@ class CategoryBoardController extends Component {
         <RadarEchart
           options={{ maxValue: 20 }}
           data={Array.isArray( this.state.selectedData.stats)? this.state.selectedData.stats: toArray(this.state.selectedData.stats)}/>
+        <NoteWrapper>
         {
           map(this.state.selectedData.notes, (value, key) => {
             return (
@@ -76,6 +77,7 @@ class CategoryBoardController extends Component {
             )
           })
         }
+        </NoteWrapper>
         </ChartAndNoteWrapper>
       </BoardWrapper>
     )
@@ -95,6 +97,8 @@ const ChartAndNoteWrapper = styled.div`
   flex-direction: column;
 `
 
-const ChartWrapper = styled.div`
-  width: 50%;
+const NoteWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  padding: 1rem;
 `

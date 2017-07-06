@@ -109,5 +109,6 @@ export const NoteWrapper = styled.div`
   height: 100px; 
   padding: 1rem;
   overflow: hidden;
+  margin: 0.2rem;
   pointer-events: ${props => props.editable? "auto": "none"};
 `
