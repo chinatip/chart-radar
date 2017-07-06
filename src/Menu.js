@@ -31,11 +31,6 @@ const MainMenu = ({ usersFullname, groupByPosition, isHome, selectedUser, update
           Manage Users
         </button>
       </Link>
-      <Link to={"/all"}>
-        <button>
-          All
-        </button>
-      </Link>
       <AddUserButton 
         isHome={isHome}
         onClick={addUser}

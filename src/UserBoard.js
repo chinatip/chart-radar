@@ -69,6 +69,7 @@ class UserBoard extends Component {
   render() {
     return (
       <UserBoardWrapper>
+        <NewMenu />
         <Menu 
           data={this.props.data}
           isHome={true}
@@ -78,7 +79,6 @@ class UserBoard extends Component {
           updateSelectedUserHover={(key) => this.updateSelectedUserHover(key)}
           updateSelectedUserClick={(key) => this.updateSelectedUserClick(key)}  
         />
-        <NewMenu />
         <h1>Home</h1>
         {this.state.selectedUser.fullname}
         <Link to={"/edit/" + this.state.idOfSelectedUser}>

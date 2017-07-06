@@ -15,7 +15,7 @@ const NewMenu = () => {
           All
         </button>
       </Link>
-      <Link to={"/category/Developer"}>
+      <Link to={"/category/developer"}>
         <button>
           Developer
         </button>
