@@ -20,7 +20,7 @@
     },
     "1": {
       "fullname": "Namtan Chinatip",
-      "position": "????",
+      "position": "unknown",
       "stats": {
         "0": { "label": "Math", "value": 7 },
         "1": { "label": "Chinese", "value": 9 },

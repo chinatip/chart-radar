@@ -4,6 +4,7 @@ import Note from '../Note'
 import RadarEchart from '../RadarEchart'
 import { map, toArray, groupBy } from 'lodash'
 import { isLoaded } from 'react-redux-firebase';
+import styled from 'styled-components'
 
 class CategoryBoardController extends Component {
   constructor(props) {
@@ -26,6 +27,8 @@ class CategoryBoardController extends Component {
 
   updatePropData() {
     const categoryData = (this.props.category == 'all')? this.props.data : groupBy(this.props.data, g => g.position)[this.props.category];
+    if(categoryData != null)
+    {
       const firstElement = Object.keys(categoryData)[0];
       this.setState({
         category: this.props.category,
@@ -33,6 +36,7 @@ class CategoryBoardController extends Component {
         selectedData: categoryData[firstElement],
         idOfSelectedData: firstElement
       });
+    }
   }
 
   updateSelectedData = (key) => {
@@ -48,12 +52,13 @@ class CategoryBoardController extends Component {
 
   render() {
     return (
-      <div>
+      <BoardWrapper>
         <CategoryList 
           data={this.state.data}
           updateSelectedData={(key) => this.updateSelectedData(key)}
           updateFirstData={(key) => this.updateFirstData(key)}
         />
+        <ChartAndNoteWrapper>
         <RadarEchart
           options={{ maxValue: 20 }}
           data={Array.isArray( this.state.selectedData.stats)? this.state.selectedData.stats: toArray(this.state.selectedData.stats)}/>
@@ -71,9 +76,25 @@ class CategoryBoardController extends Component {
             )
           })
         }
-      </div>
+        </ChartAndNoteWrapper>
+      </BoardWrapper>
     )
   }
 }
 
 export default CategoryBoardController;
+
+const BoardWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+`
+
+const ChartAndNoteWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
+const ChartWrapper = styled.div`
+  width: 50%;
+`

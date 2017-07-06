@@ -58,7 +58,7 @@ class EditPersonalInfo extends Component {
           <option value="undefined" disabled selected hidden>Position</option>
           <option value="developer">Developer</option>
           <option value="designer">Designer</option>
-          <option value="undefined">Undefined</option>
+          <option value="unknown">Unknown</option>
         </select>
         <button onClick={this.updatePosition}>Save</button>
         

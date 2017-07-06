@@ -1,10 +1,11 @@
 import React from 'react';
 import { map, filter } from 'lodash'
 import { Link } from 'react-router-dom'
+import styled from 'styled-components'
 
 const categoryList = ({data, updateSelectedData}) => {
   return (
-    <div>
+    <ListWrapper>
       {
         map(data, (value, key) => {
             return (
@@ -24,8 +25,13 @@ const categoryList = ({data, updateSelectedData}) => {
             )
         })
       }
-    </div>
+    </ListWrapper>
   )
 }
 
 export default categoryList;
+
+const ListWrapper = styled.div`
+  width: 30%;
+  background-color: grey;
+`

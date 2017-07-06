@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { UserBoardWrapper, EditButton } from './scoreboard-styles';
+import {firebaseConnect, dataToJS} from 'react-redux-firebase';
 import Menu from './Menu'
 import NewMenu from './NewMenu'
 import { map, toArray } from 'lodash';
@@ -48,7 +49,7 @@ class UserBoard extends Component {
     const {firebase} = this.props;
     const newData = {
       "fullname": "New User",
-      "position": "Undefined",
+      "position": "unknown",
       "stats": {
         "0": { "label": "label-1", "value": 8 },
         "1": { "label": "label-2", "value": 8 },
@@ -63,13 +64,13 @@ class UserBoard extends Component {
         }
       }
     }
-    const id = firebase.push('/users', newData);
+    firebase.push('/users', newData)
   }
 
   render() {
     return (
       <UserBoardWrapper>
-        <NewMenu data={this.props.data} />
+        <NewMenu data={this.props.data} firebase={this.props.firebase}/>
         <Menu 
           data={this.props.data}
           isHome={true}
