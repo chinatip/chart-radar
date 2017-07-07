@@ -19,24 +19,42 @@ class CategoryBoardController extends Component {
     }
   }
   
+  componentWillMount() {
+    this.updatePropData();
+  }
+
   componentDidUpdate(prevProps, prevState) {
     if(prevProps.category !== this.props.category) {
       this.updatePropData();
     }
   }
 
+  groupByPosition(category) {
+    const selectedPositionObj = {}
+    const selectedPosition = map(this.props.data, (value, key) => {
+      if(category === 'all' || category === value.position)
+        selectedPositionObj[key]= value;
+      return {}
+    })
+    return selectedPositionObj;
+  }
+
   updatePropData() {
-    const categoryData = (this.props.category == 'all')? this.props.data : groupBy(this.props.data, g => g.position)[this.props.category];
+    const group = this.groupByPosition(this.props.category);
+    // console.log(group)
+    // console.log(groupBy(this.props.data, g => g.position)[this.props.category])
+    // this.props.data : groupBy(this.props.data, g => g.position)[this.props.category]
+    const categoryData = (this.props.category == 'all')? this.props.data : group;
     if(categoryData != null)
-    {
-      const firstElement = Object.keys(categoryData)[0];
-      this.setState({
-        category: this.props.category,
-        data: categoryData,
-        selectedData: categoryData[firstElement],
-        idOfSelectedData: firstElement
-      });
-    }
+      {
+        const firstElement = Object.keys(categoryData)[0];
+        this.setState({
+          category: this.props.category,
+          data: categoryData,
+          selectedData: categoryData[firstElement],
+          idOfSelectedData: firstElement
+        });
+      }
   }
 
   updateSelectedData = (key) => {

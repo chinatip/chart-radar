@@ -77,7 +77,7 @@ class UserBoard extends Component {
           ----------
           <h2>Welcome!</h2>
         </div>
-        <Menu 
+        {/*<Menu 
           data={this.props.data}
           isHome={true}
           addUser={this.addUser}
@@ -112,7 +112,7 @@ class UserBoard extends Component {
               />
             )
           })
-        }
+        }*/}
       </UserBoardWrapper>
     );
   }

@@ -74,6 +74,12 @@ const CreateEditController = () => {
     render() {
       return (
         <div>
+          <Button onClick={this.addUser} href={"/"}>
+            Create User
+          </Button>
+          <Button href={"/"}>
+            Cancel
+          </Button>
           <EditController 
             data={this.state.data} 
             userKey={this.props.userKey} 
@@ -86,13 +92,6 @@ const CreateEditController = () => {
             deleteGraphItem={this.deleteGraphItem}
             updateGraph={this.updateGraph}
           />
-          
-          <Button onClick={this.addUser} href={"/"}>
-            Create User
-          </Button>
-          <Button href={"/"}>
-            Cancel
-          </Button>
         </div>
       )
     }
