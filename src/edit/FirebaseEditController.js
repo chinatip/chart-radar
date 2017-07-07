@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { UndoRedo } from './UndoRedo'
+import { UndoRedo } from './UndoRedo';
 import { 
   updatePersonalInfo, 
   addNote, 
@@ -8,8 +8,8 @@ import {
   addGraphItem,
   deleteGraphItem,
   updateGraph
-} from './firebase-actions'
-import EditController from './EditController'
+} from './firebase-actions';
+import EditController from './EditController';
 
 const FirebaseEditController = () => {
   return class withFirebaseEdit extends Component {

@@ -10,7 +10,7 @@ export default class EditPersonalInfo extends Component {
   }
 
   handleChangeName = (event) => {
-    this.setState({fullname: event.target.value});
+    this.setState({ fullname: event.target.value });
   }
 
   handleKeyPressName = (event) => {
@@ -20,15 +20,17 @@ export default class EditPersonalInfo extends Component {
   }
   
   updateFullname = () => {
-    this.props.updatePerson({fullname: this.state.fullname})
+    const prevStats = this.props.data;
+    this.props.updatePerson({ ...prevStats, fullname: this.state.fullname })
   }
 
   handleChangePosition = (event) => {
-    this.setState({position: event.target.value});
+    this.setState({ position: event.target.value });
   }
   
   updatePosition = () => {
-    this.props.updatePerson({position: this.state.position})
+    const prevStats = this.props.data;
+    this.props.updatePerson({ ...prevStats, position: this.state.position })
   }
 
 

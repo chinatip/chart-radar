@@ -36,7 +36,8 @@ class Note extends Component {
 
   updateTitle = () => {
     this._isTyping = false;
-    this.props.updateNote(this.props.id, {title: this.state.title});
+    const prevStats = this.props.data;
+    this.props.updateNote(this.props.id, { ...prevStats, title: this.state.title});
   }
 
   handleChangeText = (event) => {
@@ -52,12 +53,15 @@ class Note extends Component {
 
   updateText = () => {
     this._isTyping = false;
-    this.props.updateNote(this.props.id, {text: this.state.text});
+    const prevStats = this.props.data;
+    this.props.updateNote(this.props.id, { ...prevStats, text: this.state.text});
   }
 
   render() {
     return (
       <NoteWrapper editable={this.props.editable}>
+        {this.props.data.title}<br />
+        {this.props.data.text}
         <EditInputTitle 
           value={this.state.title}
           onChange={this.handleChangeTitle}
