@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { UndoRedo } from './UndoRedo';
 import EditController from './EditController';
+import { Link, Redirect } from 'react-router-dom';
+import styled from 'styled-components'
 
 const CreateEditController = () => {
   return class createUserController extends Component {
@@ -37,7 +39,7 @@ const CreateEditController = () => {
 
     updateNote = (noteID, item) => {
       this.setState({
-        data: {...this.state.data, "notes": {item}}
+        data:{...this.state.data, "notes": {...this.state.data["notes"], [noteID]: item}}
       });
     }
 
@@ -63,20 +65,35 @@ const CreateEditController = () => {
       });
     }
 
+    addUser = () => {
+      const { firebase } = this.props;
+      firebase.push('/users/', this.state.data);
+      <Redirect to={"/"} />
+    }
+
     render() {
       return (
-        <EditController 
-          data={this.state.data} 
-          userKey={this.props.userKey} 
-          firebase={this.props.firebase}
-          updatePerson={this.updatePerson}
-          addNote={this.addNote}
-          deleteNote={this.deleteNote}
-          updateNote={this.updateNote}
-          addGraphItem={this.addGraphItem}
-          deleteGraphItem={this.deleteGraphItem}
-          updateGraph={this.updateGraph}
-        />
+        <div>
+          <EditController 
+            data={this.state.data} 
+            userKey={this.props.userKey} 
+            firebase={this.props.firebase}
+            updatePerson={this.updatePerson}
+            addNote={this.addNote}
+            deleteNote={this.deleteNote}
+            updateNote={this.updateNote}
+            addGraphItem={this.addGraphItem}
+            deleteGraphItem={this.deleteGraphItem}
+            updateGraph={this.updateGraph}
+          />
+          
+          <Button onClick={this.addUser} href={"/"}>
+            Create User
+          </Button>
+          <Button href={"/"}>
+            Cancel
+          </Button>
+        </div>
       )
     }
   }
@@ -101,3 +118,14 @@ const newData = {
     }
   }
 };
+
+const Button = styled.a`
+  text-decoration: none;
+  padding: 1rem;
+  margin: 0.2rem;
+  width: 100px;
+  color: white;
+  background-color: black;
+  border: 1px solid white;
+
+`
