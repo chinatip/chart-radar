@@ -26,15 +26,13 @@ export const withFirebaseController = (ChartComponent, chartOptions) => {
       firebasePath: '/chart/1234'
     };
     onUpdateValue = (key, value) => {
-      const prevStats = this.props.data[key]
-      const updatePath = this.props.firebasePath + key
-      this.props.firebase.update(updatePath, { ...prevStats, value: Number(value) })
+      const prevStats = this.props.data[key];
+      this.props.updateGraph(key, { ...prevStats, value: Number(value) });
     }
 
     onUpdateLabel = (key, value) => {
-      const prevStats = this.props.data[key]
-      const updatePath = this.props.firebasePath + key
-      this.props.firebase.update(updatePath, { ...prevStats, label: value })
+      const prevStats = this.props.data[key];
+      this.props.updateGraph(key, { ...prevStats, label: value });
     }
 
     onAddItem = () => {
@@ -49,11 +47,11 @@ export const withFirebaseController = (ChartComponent, chartOptions) => {
         }
       })
       let newLabel = this.generateLabel(labels.sort(function(a,b){return a - b}))
-      this.props.firebase.push(this.props.firebasePath, {label: "label-" + newLabel, value: 5})
+      this.props.addGraphItem({ label: "label-" + newLabel, value: 5 });
     }
 
     onDeleteItem = (key) => {
-      this.props.firebase.remove(this.props.firebasePath + key)
+      this.props.deleteGraphItem(key);
     }
 
     generateLabel(nums) {

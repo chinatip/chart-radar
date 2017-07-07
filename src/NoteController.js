@@ -8,22 +8,19 @@ class NoteController extends Component {
   }
 
   addNote = () => {
-    const { firebase } = this.props;
     const newNote = {
       "title": "Title",
       "text" : "Text"
     }
-    firebase.push(this.props.firebasePath, newNote);
+    this.props.addNote(newNote);
   }
 
   deleteNote = (key) => {
-    const { firebase, firebasePath } = this.props;
-    firebase.remove(firebasePath + key);
+    this.props.deleteNote(key);
   }
 
   updateNote = (key, value) => {
-    const { firebase, firebasePath } = this.props;
-    firebase.update( firebasePath + key, value)
+    this.props.updateNote(key, value);
   }
 
   render() {

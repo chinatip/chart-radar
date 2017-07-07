@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Menu from '../Menu'
+import NewMenu from '../NewMenu'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { firebaseConnect, dataToJS } from 'react-redux-firebase'
@@ -65,7 +65,7 @@ class ManageUser extends Component {
     const {usersData} = this.props;
     return (
       <div style={{display: "flex"}}>
-        <Menu isHome={false}/>
+        <NewMenu isHome={false}/>
         <h1>Manage User</h1>
         <ManageUserWrapper>
           <div>

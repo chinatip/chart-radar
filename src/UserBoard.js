@@ -77,7 +77,7 @@ class UserBoard extends Component {
           ----------
           <h2>Welcome!</h2>
         </div>
-        {/*<Menu 
+        <Menu 
           data={this.props.data}
           isHome={true}
           addUser={this.addUser}
@@ -87,7 +87,8 @@ class UserBoard extends Component {
           updateSelectedUserClick={(key) => this.updateSelectedUserClick(key)}  
         />
         <h1>Home</h1>
-        {this.state.selectedUser.fullname}
+        {this.state.selectedUser.fullname}<br />
+        {this.state.idOfSelectedUser}
         <Link to={"/edit/" + this.state.idOfSelectedUser}>
           <EditButton
             isSelectUser={this.state.idOfSelectedUser}
@@ -111,7 +112,7 @@ class UserBoard extends Component {
               />
             )
           })
-        }*/}
+        }
       </UserBoardWrapper>
     );
   }
