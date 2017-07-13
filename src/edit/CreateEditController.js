@@ -72,6 +72,7 @@ const CreateEditController = () => {
     }
 
     render() {
+      // if(!this.props.data==null)
       return (
         <div>
           <Button onClick={this.addUser} href={"/"}>

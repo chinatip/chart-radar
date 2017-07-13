@@ -2,7 +2,7 @@
   "users": {
     "0": {
       "fullname": "Ranatchai Ch.",
-      "position": "Developer",
+      "position": "developer",
       "stats": {
         "0": { "label": "Math", "value": 10 },
         "1": { "label": "Chinese", "value": 8 },
@@ -38,7 +38,7 @@
     },
     "_xxx_": {
       "fullname": "Ranatchai Ch.",
-      "position": "Developer",
+      "position": "developer",
       "stats": {
         "0": { "label": "Math", "value": 10 },
         "1": { "label": "Chinese", "value": 8 },

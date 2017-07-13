@@ -60,8 +60,12 @@ class Note extends Component {
   render() {
     return (
       <NoteWrapper editable={this.props.editable}>
-        {this.props.data.title}<br />
-        {this.props.data.text}
+        <DeleteButton 
+          editable={this.props.editable}
+          onClick={() => this.props.deleteNote(this.props.id)}
+        >
+        X
+        </DeleteButton>
         <EditInputTitle 
           value={this.state.title}
           onChange={this.handleChangeTitle}
@@ -76,12 +80,6 @@ class Note extends Component {
           onKeyPress={this.handleKeyPressText}
         >
         </EditInputText>
-        <DeleteButton 
-          editable={this.props.editable}
-          onClick={() => this.props.deleteNote(this.props.id)}
-        >
-        X
-        </DeleteButton>
       </NoteWrapper>
     )
   }
@@ -93,23 +91,29 @@ export const EditInputTitle = styled.input`
   border: none;
   position: relative;
   text-align: left;
+  font-weight: bold;
+  font-size: 1.2rem;
 `
 
-export const EditInputText = styled.input`
+export const EditInputText = styled.textarea`
   border: none;
   position: relative;
   text-align: left;
+  height: 100%;
 `
 
 const DeleteButton = styled.button`
   display: ${props => props.editable? "block": "none"};
+  width: 20px;
+  hright: 20px;
+  margin-left: auto;
 `
 
 export const NoteWrapper = styled.div`
   display: flex;
   flex-direction: column;
   border: 2px solid black; 
-  width: 100px; 
+  width: 200px; 
   height: 100px; 
   padding: 1rem;
   overflow: hidden;

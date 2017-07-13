@@ -40,7 +40,7 @@ class NoteController extends Component {
             )
           }) 
         }
-        <button onClick={this.addNote}>Add new note</button>
+        <button onClick={this.addNote} style={{marginLeft: "10px"}}>Add new note</button>
       </div>
     )
   }

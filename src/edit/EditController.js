@@ -16,7 +16,7 @@ const EditController = ({
     updateGraph
   }) => {
   return (
-  <div style={{display: "flex"}}>
+  <div style={{display: "flex", marginLeft: "20px"}}>
     <div style={{display: "flex", flexDirection: "column"}}>
       <EditPersonalInfo
         id={userKey}
