@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
+import map from 'lodash/map';
+
 import Note from './Note';
-import { map } from 'lodash';
 
 class NoteController extends Component {
-  constructor(props) {
-    super();
-  }
-
   addNote = () => {
     const newNote = {
       "title": "Title",
       "text" : "Text"
     }
+    
     this.props.addNote(newNote);
   }
 

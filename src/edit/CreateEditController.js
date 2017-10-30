@@ -1,8 +1,20 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
+import styled from 'styled-components';
+
 import { UndoRedo } from './UndoRedo';
 import EditController from './EditController';
-import { Link, Redirect } from 'react-router-dom';
-import styled from 'styled-components'
+import { newData } from '../const/index';
+
+const Button = styled.a`
+  text-decoration: none;
+  padding: 1rem;
+  margin: 0.2rem;
+  width: 100px;
+  color: white;
+  background-color: black;
+  border: 1px solid white;
+`;
 
 const CreateEditController = () => {
   return class createUserController extends Component {
@@ -15,58 +27,55 @@ const CreateEditController = () => {
       this._undoRedo = new UndoRedo();
     }
 
-    updatePerson = (item) => {
+    updateData = (data) => {
       this.setState({
-        data: item
-      })
+        data: data
+      });
+    }
+
+    getRandomKey() {
+      return Math.floor(Math.random()*90000) + 10000 + "";
     }
 
     addNote = (item) => {
-      let randomKey = Math.floor(Math.random()*90000) + 10000+"";
-      const addedItemData = { ...this.state.data, "notes": {...this.state.data["notes"], [randomKey]: item}}
-      this.setState({
-        data: addedItemData
-      });
+      const randomKey = this.getRandomKey();
+      const addedItemData = { ...this.state.data, "notes": {...this.state.data["notes"], [randomKey]: item }};
+      
+      this.updateData(addedItemData);
     }
     
     deleteNote = (noteID) => {
-      const removedItemData =this.state.data;
-      delete this.state.data["notes"][noteID]
-      this.setState({
-        data: removedItemData
-      });
+      const removedItemData = this.state.data;
+      delete this.state.data["notes"][noteID];
+
+      this.updateData(removedItemData);
     }
 
     updateNote = (noteID, item) => {
-      this.setState({
-        data:{...this.state.data, "notes": {...this.state.data["notes"], [noteID]: item}}
-      });
+      this.updateData({ ...this.state.data, "notes": {...this.state.data["notes"], [noteID]: item }});
     }
 
     addGraphItem = (item) => {
-      let randomKey = Math.floor(Math.random()*90000) + 10000+"";
-      const addedItemData = { ...this.state.data, "stats": {...this.state.data["stats"], [randomKey]: item}}
-      this.setState({
-        data: addedItemData
-      });
+      const randomKey = this.getRandomKey();
+      const addedItemData = { ...this.state.data, "stats": {...this.state.data["stats"], [randomKey]: item }};
+      
+      this.updateData(addedItemData);
     }
 
     deleteGraphItem = (itemID) => {
-      const removedItemData =this.state.data;
-      delete this.state.data["stats"][itemID]
-      this.setState({
-        data: removedItemData
-      });
+      const removedItemData = this.state.data;
+      delete this.state.data["stats"][itemID];
+
+      this.updateData(removedItemData);
     }
 
     updateGraph = (itemID, item) => {
-      this.setState({
-        data: {...this.state.data, "stats": {...this.state.data["stats"], [itemID]: item}}
-      });
+      this.updateData({ ...this.state.data, "stats": {...this.state.data["stats"], [itemID]: item }});
     }
 
     addUser = () => {
       const { firebase } = this.props;
+
       firebase.push('/users/', this.state.data);
       <Redirect to={"/"} />
     }
@@ -84,7 +93,7 @@ const CreateEditController = () => {
             data={this.state.data} 
             userKey={this.props.userKey} 
             firebase={this.props.firebase}
-            updatePerson={this.updatePerson}
+            updatePerson={this.updateData}
             addNote={this.addNote}
             deleteNote={this.deleteNote}
             updateNote={this.updateNote}
@@ -93,38 +102,9 @@ const CreateEditController = () => {
             updateGraph={this.updateGraph}
           />
         </div>
-      )
+      );
     }
   }
 }
 
 export default CreateEditController;
-
-const newData = {
-  "fullname": "New User",
-  "position": "unknown",
-  "stats": {
-    "0": { "label": "label-1", "value": 8 },
-    "1": { "label": "label-2", "value": 8 },
-    "2": { "label": "label-3", "value": 8 },
-    "3": { "label": "label-4", "value": 8 },
-    "4": { "label": "label-5", "value": 8 }
-  },
-  "notes": {
-    "0": {
-      "title": "Title",
-      "text" : "Text"
-    }
-  }
-};
-
-const Button = styled.a`
-  text-decoration: none;
-  padding: 1rem;
-  margin: 0.2rem;
-  width: 100px;
-  color: white;
-  background-color: black;
-  border: 1px solid white;
-
-`
