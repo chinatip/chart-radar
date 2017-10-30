@@ -1,13 +1,8 @@
-import React, { Component } from 'react'
-import * as ChartJS from "react-chartjs"
-import * as Rechart from 'recharts';
-import ScoreItem from './ScoreItem'
-import { RadarRechart } from './RadarRechart'
+import React, { Component } from 'react';
+import toArray from 'lodash/toArray';
 
-import { toArray } from 'lodash'
-import { RadarChartControllerWrapper, AddButton } from './scoreboard-styles'
-import { Link } from 'react-router-dom'
-import { EditScoreMenu } from './EditScoreMenu'
+import { RadarChartControllerWrapper } from './scoreboard-styles';
+import { EditScoreMenu } from './EditScoreMenu';
 
 const withChartController = (ChartComponent, chartOptions={}) => {
   const ChartWithController = ({ data, updateLabel, updateValue, addItem, deleteItem }) => (
@@ -21,6 +16,7 @@ const withChartController = (ChartComponent, chartOptions={}) => {
       />
       <ChartComponent data={Array.isArray(data)? data: toArray(data)} options={chartOptions}/>
     </RadarChartControllerWrapper>
-  )
-  return ChartWithController
+  );
+  
+  return ChartWithController;
 }
