@@ -1,23 +1,22 @@
 import React, { Component } from 'react';
+import map from 'lodash/map';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { firebaseConnect, dataToJS, isLoaded } from 'react-redux-firebase';
+
 import { 
   MenuWrapper,
   AddUserButton,
   Logo,
   UserListWrapper 
-} from './scoreboard-styles';
-import User from './User'
-import { map } from 'lodash';
-import { compose } from 'redux'
-import { connect } from 'react-redux'
-import { Link } from 'react-router-dom';
-import { firebaseConnect, dataToJS, isLoaded } from 'react-redux-firebase'
-
+} from '../scoreboard-styles';
+import User from '../User';
 
 const MainMenu = ({ usersFullname, groupByPosition, isHome, selectedUser, updateSelectedUserHover, updateSelectedUserClick, addUser }) => {
   if (!isLoaded(groupByPosition)) {
-    return <div>Loading...</div>
+    return <div>Loading...</div>;
   }
-  console.log("printing")
   return (
     <MenuWrapper>
       <Logo />
@@ -55,27 +54,12 @@ const MainMenu = ({ usersFullname, groupByPosition, isHome, selectedUser, update
                       updateSelectedUserHover={updateSelectedUserHover}
                       updateSelectedUserClick={updateSelectedUserClick}
                     />
-                  )
+                  );
                 }) 
               }</div>
             )
           })
         }
-        {/*{
-          map(usersFullname, (value, key) => {
-            return (
-              <User
-                key = {key}
-                id = {key}
-                data={value}
-                isMenu={true}
-                selected={key === selectedUser}
-                updateSelectedUserHover={updateSelectedUserHover}
-                updateSelectedUserClick={updateSelectedUserClick}
-              />
-            )
-          })
-        }*/}
       </UserListWrapper>
     </MenuWrapper>
   )
@@ -96,7 +80,7 @@ class Menu extends Component {
           updateSelectedUserHover={this.props.updateSelectedUserHover}
           updateSelectedUserClick={this.props.updateSelectedUserClick}
         />
-      )
+      );
     }
     return (
       <MenuWrapper>
@@ -112,7 +96,7 @@ class Menu extends Component {
           </button>
         </Link>
       </MenuWrapper>
-    )
+    );
   }
 }
 
@@ -120,11 +104,10 @@ const enhancer = compose(
   firebaseConnect(['/fullnames']), 
   connect(
     ({ firebase }, props) => {
-      console.log('firebase', firebase)
       const usersFullname = dataToJS(firebase, '/fullnames');
-      return { usersFullname }
+      return { usersFullname };
     }
   )
-)
+);
 
-export default enhancer(Menu)
+export default enhancer(Menu);

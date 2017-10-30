@@ -5,7 +5,7 @@ import map from 'lodash/map';
 import groupBy from 'lodash/groupBy';
 import { firebaseConnect, dataToJS } from 'react-redux-firebase';
 
-import UserBoard from './UserBoard';
+import UserBoard from './components/UserBoard';
 
 const Home = ({firebase, usersData}) => {
   const groupUser = map(usersData, (user, userKey) => { 
