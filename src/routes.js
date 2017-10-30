@@ -6,10 +6,10 @@ import { GlobalStyles } from './scoreboard-styles';
 import ManageUser from './pages/ManageUser'
 import Category from './pages/Category'
 
-class App extends Component {
+class routes extends Component {
   render() {
     return (
-      <div className="App" >
+      <div className="routes" >
         <GlobalStyles/>
         <Switch>
           <Route exact path="/" component={ Home }/>
@@ -22,4 +22,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default routes;
